@@ -34,19 +34,15 @@ function M.init()
         use 'junegunn/vim-peekaboo'
         use 'theprimeagen/harpoon'
         use 'editorconfig/editorconfig-vim'
+        use 'lukas-reineke/indent-blankline.nvim'
+
+        use 'folke/which-key.nvim'
 
         use {
             'nvim-telescope/telescope.nvim',
             branch = '0.1.x',
         }
 
-        use {
-            'folke/which-key.nvim',
-            config = function()
-                require("which-key").setup {
-                }
-            end,
-        }
 
         use {
             'nvim-lualine/lualine.nvim',
