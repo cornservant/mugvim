@@ -65,6 +65,9 @@ function M:init(base_dir)
 
     -- SETUP PLUGINS
 
+    require("mugvim.config")
+    require("mugvim.remap")
+    require("mugvim.colors")
     require("mugvim.core.plugins").init()
 
     -- require("mugvim.config"):init()

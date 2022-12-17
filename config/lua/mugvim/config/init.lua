@@ -1,5 +1,7 @@
 -- Default settings
 
+local fs = require("mugvim.fs")
+
 vim.opt.expandtab = true
 vim.opt.shiftwidth = 4
 vim.opt.softtabstop = 4
@@ -26,5 +28,5 @@ vim.opt.ignorecase = true
 vim.opt.conceallevel = 0
 vim.opt.cmdheight = 1
 vim.opt.laststatus = 3
--- vim.opt.undodir = ???
--- vim.opt.shadafile = ???
+vim.opt.undodir = fs.join_paths(vim.fn.stdpath("cache"), "undo")
+vim.opt.shadafile = fs.join_paths(vim.fn.stdpath("cache"), "mugvim.shada")

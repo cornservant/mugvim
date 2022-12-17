@@ -66,6 +66,22 @@ local banner = {
     "⠀⠀⠀⠀⠉⠀⠀⢀⣠⡞⣫⣿⠁⠀⠀⠀⠀⢠⡇⢸⣿⠀⠀⠀⠀⠀⢸⣿⡇⠀⠀⠀⠀⠀⠀⠀⢸⡶⠞⠁⠀⠀⠀⠀⠀⠀",
 }
 
+local mugvim_banner = {
+    "",
+    "",
+    "888b     d888                  888     888 8888888 888b     d888",
+    "8888b   d8888                  888     888   888   8888b   d8888",
+    "88888b.d88888                  888     888   888   88888b.d88888",
+    "888Y88888P888 888  888  .d88b. Y88b   d88P   888   888Y88888P888",
+    "888 Y888P 888 888  888 d88P\"88b Y88b d88P    888   888 Y888P 888",
+    "888  Y8P  888 888  888 888  888  Y88o88P     888   888  Y8P  888",
+    "888   \"   888 Y88b 888 Y88b 888   Y888P      888   888   \"   888",
+    "888       888  \"Y88888  \"Y88888    Y8P     8888888 888       888",
+    "                            888                                 ",
+    "                       Y8b d88P                                 ",
+    "                        \"Y88P\"                                  ",
+}
+
 
 require("startup").setup({
     parts = { "header", "body", "footer" },
@@ -74,7 +90,7 @@ require("startup").setup({
         align = "center",
         title = "Header",
         margin = 5,
-        content = banner,
+        content = mugvim_banner,
         highlight = "Statement",
         default_color = "blue",
     },
@@ -116,7 +132,5 @@ vim.g.everforest_enable_italic = 1
 -- options: 0, 1, 2
 vim.g.everforest_transparent_background = 1
 -- > tokyonight
-require("tokyonight").setup({
-    style = "moon",
-})
-vim.cmd [[ colorscheme tokyonight ]]
+
+require("mugvim.colors").colors("tokyonight")
