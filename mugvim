@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
 
-CWD=$(dirname $0)
-cd $CWD
+MUGVIM_BASE_DIR=$(dirname $0)
 nvim -u init.lua $*

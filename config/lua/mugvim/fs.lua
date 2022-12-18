@@ -1,6 +1,6 @@
 local M = {}
 
-local path_sep = vim.loop.os_uname().version:match "Windows" and "\\" or "/"
+local path_sep = vim.loop.os_uname().version:match 'Windows' and '\\' or '/'
 
 function M.join_paths(...)
     local result = table.concat({ ... }, path_sep)

@@ -20,7 +20,3 @@ if not vim.tbl_contains(vim.opt.rtp:get(), config_dir) then
 end
 
 require("mugvim"):init(base_dir)
-require("userconfig")
-
--- CONFIGURATION
--- require "mugvim"
