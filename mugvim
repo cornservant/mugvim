@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
 MUGVIM_BASE_DIR=$(dirname $0)
-nvim -u init.lua $*
+nvim -u "$MUGVIM_BASE_DIR/init.lua" $*
