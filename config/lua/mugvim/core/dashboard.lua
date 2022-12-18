@@ -22,6 +22,10 @@ function M.setup()
     local dashboard = require('dashboard')
 
     dashboard.custom_center = {
+        { icon = '  ',
+            desc = 'New Buffer                              ',
+            action = vim.cmd.new,
+            shortcut = ':new' },
         { icon = '  ',
             desc = 'Edit User Configuration                 ',
             action = require('mugvim.core.which-key').edit_userconfig,
