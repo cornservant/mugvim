@@ -25,7 +25,7 @@ function M.setup()
         { icon = '  ',
             desc = 'New Buffer                              ',
             action = vim.cmd.new,
-            shortcut = ':new' },
+            shortcut = ':new   ' },
         { icon = '  ',
             desc = 'Edit User Configuration                 ',
             action = require('mugvim.core.which-key').edit_userconfig,
