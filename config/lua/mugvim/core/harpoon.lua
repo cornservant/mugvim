@@ -5,10 +5,10 @@ function M.setup()
     local mark = require("harpoon.mark")
 
     require("which-key").register({
-        a = { "<cmd>lua require(\"harpoon.mark\").add_file()<cr>", "Harpoon Mark" },
+        a = { mark.add_file, "Harpoon Mark" },
     }, { prefix = "<leader>" })
 
-    vim.keymap.set("n", "<C-e>", function() require("harpoon.ui").toggle_quick_menu() end)
+    vim.keymap.set("n", "<C-e>", ui.toggle_quick_menu)
 end
 
 return M
