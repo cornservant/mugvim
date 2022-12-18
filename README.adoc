@@ -1,5 +1,8 @@
 = Mugway's Vim Config
 
+== Installation
+
+https://asciinema.org/a/H9GYokb2PNiCQmu3313LLBQsO
 
 == Goals
 - find a useful, but rather minimal core
