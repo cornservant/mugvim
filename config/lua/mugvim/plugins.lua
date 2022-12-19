@@ -118,7 +118,7 @@ function M.setup()
         use {
             'lewis6991/gitsigns.nvim',
             config = function()
-                require('gitsigns').setup()
+                require('mugvim.core.gitsigns').setup()
             end,
         }
 
