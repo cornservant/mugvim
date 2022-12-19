@@ -1,9 +1,9 @@
 local M = {}
 
 function M.setup()
-    local nvim_tree = require('nvim-tree')
+    local nt = require('nvim-tree')
 
-    nvim_tree.setup({
+    nt.setup({
         renderer = {
             highlight_git = true,
         },
@@ -15,7 +15,7 @@ function M.setup()
     })
 
     require("which-key").register({
-        e = { nvim_tree.toggle, "Tree" },
+        e = { function() nt.toggle(true) end, "Tree" },
     }, { prefix = "<leader>" })
 end
 
