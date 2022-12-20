@@ -90,7 +90,7 @@ function M.setup()
         use {
             'simrat39/symbols-outline.nvim',
             config = function()
-                require('symbols-outline').setup()
+                require('mugvim.core.symbols-outline').setup()
             end,
         }
 
@@ -125,7 +125,7 @@ function M.setup()
         use {
             'akinsho/bufferline.nvim',
             config = function()
-                require('bufferline').setup()
+                require('mugvim.core.bufferline').setup()
             end,
         }
 
@@ -139,8 +139,7 @@ function M.setup()
         use {
             'numToStr/Comment.nvim',
             config = function()
-                require('Comment').setup({
-                })
+                require('mugvim.core.comment').setup()
             end,
         }
 
