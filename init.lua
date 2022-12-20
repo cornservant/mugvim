@@ -1,3 +1,7 @@
+-- nvim-tree recommendation
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
 -- VERSION CHECK
 if vim.fn.has "nvim-0.8" ~= 1 then
     vim.notify("Please upgrade your Neovim base installation. Mugvim requires v0.8+", vim.log.levels.WARN)
