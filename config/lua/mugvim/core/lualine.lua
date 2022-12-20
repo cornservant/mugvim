@@ -63,6 +63,17 @@ local progress = {
     color = {},
 }
 
+local diagnostics = {
+    "diagnostics",
+    sources = { "nvim_diagnostic" },
+    symbols = {
+        error = icons.diagnostics.BoldError .. " ",
+        warn = icons.diagnostics.BoldWarning .. " ",
+        info = icons.diagnostics.BoldInformation .. " ",
+        hint = icons.diagnostics.BoldHint .. " ",
+    },
+}
+
 local lsp = {
     function(msg)
         msg = msg or "LS Inactive"
@@ -74,18 +85,14 @@ local lsp = {
             end
             return msg
         end
-        local buf_ft = vim.bo.filetype
         local buf_client_names = {}
 
-        -- add formatter
-        local formatters = require "lvim.lsp.null-ls.formatters"
-        local supported_formatters = formatters.list_registered(buf_ft)
-        vim.list_extend(buf_client_names, supported_formatters)
-
-        -- add linter
-        local linters = require "lvim.lsp.null-ls.linters"
-        local supported_linters = linters.list_registered(buf_ft)
-        vim.list_extend(buf_client_names, supported_linters)
+        -- add client
+        for _, client in pairs(buf_clients) do
+            if client.name ~= "null-ls" and client.name ~= "copilot" then
+                table.insert(buf_client_names, client.name)
+            end
+        end
 
         local unique_client_names = vim.fn.uniq(buf_client_names)
 
@@ -121,17 +128,17 @@ function M.setup()
             lualine_a = { mode },
             lualine_b = { branch },
             lualine_c = { diff },
-            lualine_x = { 'diagnostics', lsp, spaces, 'filetype' },
+            lualine_x = { diagnostics, lsp, spaces, 'filetype' },
             lualine_y = { 'location' },
             lualine_z = { progress }
         },
         inactive_sections = {
-            lualine_a = {},
-            lualine_b = {},
-            lualine_c = { 'filename' },
-            lualine_x = { 'location' },
-            lualine_y = {},
-            lualine_z = {}
+            lualine_a = { mode },
+            lualine_b = { branch },
+            lualine_c = { diff },
+            lualine_x = { diagnostics, lsp, spaces, 'filetype' },
+            lualine_y = { 'location' },
+            lualine_z = { progress }
         },
         tabline = {},
         winbar = {},
