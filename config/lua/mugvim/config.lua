@@ -15,12 +15,11 @@ function M.setup()
     vim.opt.clipboard = "unnamedplus"
     vim.opt.fileencoding = "utf-8"
     vim.opt.termguicolors = true
-    vim.opt.hlsearch = false
+    vim.opt.hlsearch = true
     vim.opt.incsearch = true
     vim.opt.signcolumn = "yes"
     vim.opt.swapfile = false
     vim.opt.backup = false
-    vim.opt.undofile = true
     vim.opt.showcmd = false
     vim.opt.cursorline = true
     vim.opt.showmode = true
@@ -29,8 +28,12 @@ function M.setup()
     vim.opt.conceallevel = 0
     vim.opt.cmdheight = 1
     vim.opt.laststatus = 3
+    vim.opt.undofile = true
     vim.opt.undodir = fs.join_paths(vim.fn.stdpath("cache"), "undo")
     vim.opt.shadafile = fs.join_paths(vim.fn.stdpath("cache"), "mugvim.shada")
+    vim.opt.showmode = false
+    vim.opt.scrolloff = 8
+    vim.opt.sidescrolloff = 8
 end
 
 return M
