@@ -25,11 +25,11 @@ function M.setup()
         { icon = '  ',
             desc = 'New Buffer                              ',
             action = dashboard.new_file,
-            shortcut = ':new   ' },
+            shortcut = ':DashboardNewFile' },
         { icon = '  ',
             desc = 'Edit User Configuration                 ',
             action = require('mugvim.core.which-key').edit_userconfig,
-            shortcut = 'SPC + c' },
+            shortcut = 'SPC + c          ' },
     }
 
     dashboard.custom_header = mugvim_banner;
