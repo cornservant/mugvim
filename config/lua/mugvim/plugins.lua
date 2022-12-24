@@ -33,8 +33,6 @@ function M.setup()
             end,
         },
         'folke/neodev.nvim',
-        'nvim-lua/plenary.nvim', -- dependency for several
-        'hrsh7th/nvim-cmp', -- dependency for lsp-zero
 
         {
             'folke/tokyonight.nvim',
@@ -66,7 +64,7 @@ function M.setup()
         'junegunn/vim-peekaboo',
         {
             'theprimeagen/harpoon',
-            requires = { 'nvim-lua/plenary.nvim' },
+            dependencies = { 'nvim-lua/plenary.nvim' },
             config = function()
                 require('mugvim.core.harpoon').setup()
             end,
@@ -82,7 +80,7 @@ function M.setup()
         {
             'nvim-telescope/telescope.nvim',
             branch = '0.1.x',
-            requires = { 'nvim-lua/plenary.nvim' },
+            dependencies = { 'nvim-lua/plenary.nvim' },
             config = function()
                 require('mugvim.core.telescope').setup()
             end,
@@ -91,7 +89,7 @@ function M.setup()
 
         {
             'nvim-lualine/lualine.nvim',
-            requires = {
+            dependencies = {
                 'nvim-tree/nvim-web-devicons',
             },
             config = function()
@@ -108,7 +106,7 @@ function M.setup()
 
         {
             'nvim-tree/nvim-tree.lua',
-            requires = {
+            dependencies = {
                 'nvim-tree/nvim-web-devicons', -- optional, for file icons
             },
             config = function()
@@ -164,7 +162,7 @@ function M.setup()
 
         {
             'TimUntersberger/neogit',
-            requires = { 'nvim-lua/plenary.nvim' },
+            dependencies = { 'nvim-lua/plenary.nvim' },
             config = function()
                 require('mugvim.core.neogit').setup()
             end,
@@ -195,7 +193,8 @@ function M.setup()
 
         {
             'VonHeikemen/lsp-zero.nvim',
-            requires = {
+            lazy = false,
+            dependencies = {
                 -- LSP Support
                 { 'neovim/nvim-lspconfig' },
                 { 'williamboman/mason.nvim' },
