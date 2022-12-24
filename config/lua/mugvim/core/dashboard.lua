@@ -24,7 +24,7 @@ function M.setup()
     dashboard.custom_center = {
         { icon = '  ',
             desc = 'New Buffer                              ',
-            action = vim.cmd.new,
+            action = dashboard.new_file,
             shortcut = ':new   ' },
         { icon = '  ',
             desc = 'Edit User Configuration                 ',
