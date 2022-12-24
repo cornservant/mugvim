@@ -16,6 +16,7 @@ function M.setup()
         ['+'] = {
             name = "Mugvim",
             c = { M.edit_userconfig, 'Edit User Configuration' },
+            l = { function() require('lazy').home() end, 'Lazy' },
         }
     }, { prefix = '<leader>' })
 end

@@ -2,82 +2,94 @@ local M = {}
 
 local fs = require('mugvim.fs')
 
-function M.install_packer()
-    local install_path = fs.join_paths(vim.fn.stdpath('data'), 'site', 'pack', 'packer', 'start', 'packer.nvim')
-    if vim.fn.isdirectory(install_path) == 0 then
-        vim.fn.system { 'git', 'clone', 'https://github.com/wbthomason/packer.nvim', install_path }
-        vim.cmd [[packadd packer.nvim]]
+function M.install_lazy()
+    local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+    vim.opt.runtimepath:prepend(lazypath)
+    if not vim.loop.fs_stat(lazypath) then
+        vim.fn.system({
+            "git",
+            "clone",
+            "--filter=blob:none",
+            "--single-branch",
+            "https://github.com/folke/lazy.nvim.git",
+            lazypath,
+        })
         return true
-    else
-        return false
     end
+    return false
 end
 
 function M.setup()
-    local fresh_install = M.install_packer()
+    M.install_lazy()
 
-    require('packer').startup(function(use)
-        use 'wbthomason/packer.nvim'
+    local opts = {}
 
-        use {
-            'folke/tokyonight.nvim',
-            config = function()
-                require('mugvim.core.tokyonight').setup()
-            end,
-        }
-        use 'rose-pine/neovim'
-        use {
-            'sainnhe/everforest',
-            config = function()
-                require('mugvim.core.everforest').setup()
-            end,
-        }
-        use 'cocopon/iceberg.vim'
-        use 'arcticicestudio/nord-vim'
-        use 'catppuccin/vim'
-        use 'morhetz/gruvbox'
-        use {
-            'navarasu/onedark.nvim',
-            config = function()
-                require('mugvim.core.onedark').setup()
-            end,
-        }
-
-        use 'tpope/vim-surround'
-        use 'tpope/vim-repeat'
-        use 'NoahTheDuke/vim-just'
-        use 'junegunn/vim-peekaboo'
-        use {
-            'theprimeagen/harpoon',
-            config = function()
-                require('mugvim.core.harpoon').setup()
-            end,
-        }
-        use 'editorconfig/editorconfig-vim'
-        use {
-            'lukas-reineke/indent-blankline.nvim',
-            config = function()
-                require('mugvim.core.indent_blankline').setup()
-            end,
-        }
-
-        use {
+    local plugins = {
+        'folke/lazy.nvim',
+        {
             'folke/which-key.nvim',
             config = function()
                 require('mugvim.core.which-key').setup()
             end,
-        }
+        },
+        'folke/neodev.nvim',
+        'nvim-lua/plenary.nvim', -- dependency for several
+        'hrsh7th/nvim-cmp', -- dependency for lsp-zero
 
-        use {
+        {
+            'folke/tokyonight.nvim',
+            config = function()
+                require('mugvim.core.tokyonight').setup()
+            end,
+        },
+        'rose-pine/neovim',
+        {
+            'sainnhe/everforest',
+            config = function()
+                require('mugvim.core.everforest').setup()
+            end,
+        },
+        'cocopon/iceberg.vim',
+        'arcticicestudio/nord-vim',
+        'catppuccin/vim',
+        'morhetz/gruvbox',
+        {
+            'navarasu/onedark.nvim',
+            config = function()
+                require('mugvim.core.onedark').setup()
+            end,
+        },
+
+        'tpope/vim-surround',
+        'tpope/vim-repeat',
+        'NoahTheDuke/vim-just',
+        'junegunn/vim-peekaboo',
+        {
+            'theprimeagen/harpoon',
+            requires = { 'nvim-lua/plenary.nvim' },
+            config = function()
+                require('mugvim.core.harpoon').setup()
+            end,
+        },
+        'editorconfig/editorconfig-vim',
+        {
+            'lukas-reineke/indent-blankline.nvim',
+            config = function()
+                require('mugvim.core.indent_blankline').setup()
+            end,
+        },
+
+        {
             'nvim-telescope/telescope.nvim',
             branch = '0.1.x',
+            requires = { 'nvim-lua/plenary.nvim' },
             config = function()
                 require('mugvim.core.telescope').setup()
             end,
-        }
+        },
 
 
-        use {
+        {
             'nvim-lualine/lualine.nvim',
             requires = {
                 'nvim-tree/nvim-web-devicons',
@@ -85,16 +97,16 @@ function M.setup()
             config = function()
                 require('mugvim.core.lualine').setup()
             end,
-        }
+        },
 
-        use {
+        {
             'simrat39/symbols-outline.nvim',
             config = function()
                 require('mugvim.core.symbols-outline').setup()
             end,
-        }
+        },
 
-        use {
+        {
             'nvim-tree/nvim-tree.lua',
             requires = {
                 'nvim-tree/nvim-web-devicons', -- optional, for file icons
@@ -102,9 +114,9 @@ function M.setup()
             config = function()
                 require('mugvim.core.nvim-tree').setup()
             end,
-        }
+        },
 
-        use {
+        {
             'nvim-treesitter/nvim-treesitter',
             run = function()
                 local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
@@ -113,56 +125,52 @@ function M.setup()
             config = function()
                 require('mugvim.core.treesitter').setup()
             end,
-        }
+        },
 
-        use {
+        {
             'lewis6991/gitsigns.nvim',
             config = function()
                 require('mugvim.core.gitsigns').setup()
             end,
-        }
+        },
 
-        use {
+        {
             'akinsho/bufferline.nvim',
             config = function()
                 require('mugvim.core.bufferline').setup()
             end,
-        }
+        },
 
-        use {
+        {
             'mbbill/undotree',
             config = function()
                 require('mugvim.core.undotree').setup()
             end,
-        }
+        },
 
-        use {
+        {
             'numToStr/Comment.nvim',
             config = function()
                 require('mugvim.core.comment').setup()
             end,
-        }
+        },
 
-        -- use {
-        --     'startup-nvim/startup.nvim',
-        --     requires = { 'nvim-telescope/telescope.nvim', 'nvim-lua/plenary.nvim' },
-        -- }
-        use {
+        {
             'glepnir/dashboard-nvim',
             config = function()
                 require('mugvim.core.dashboard').setup()
             end,
-        }
+        },
 
-        use {
+        {
             'TimUntersberger/neogit',
             requires = { 'nvim-lua/plenary.nvim' },
             config = function()
                 require('mugvim.core.neogit').setup()
             end,
-        }
+        },
 
-        use {
+        {
             'tpope/vim-fugitive',
             cmd = {
                 'G',
@@ -183,9 +191,9 @@ function M.setup()
             config = function()
                 require('mugvim.core.fugitive').setup()
             end,
-        }
+        },
 
-        use {
+        {
             'VonHeikemen/lsp-zero.nvim',
             requires = {
                 -- LSP Support
@@ -209,12 +217,9 @@ function M.setup()
                 require('mugvim.core.lsp').setup()
             end,
         }
+    }
 
-    end)
-
-    if fresh_install then
-        require('packer').sync()
-    end
+    require('lazy').setup(plugins, opts)
 end
 
 return M
