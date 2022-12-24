@@ -2,6 +2,7 @@ local M = {}
 
 function M.setup()
     local lsp = require('lsp-zero')
+    local wk = require('which-key')
 
     require("which-key").register({
         l = {
@@ -59,15 +60,22 @@ function M.setup()
 
         vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
         vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
-        vim.keymap.set("n", "<leader>lw", vim.lsp.buf.workspace_symbol, opts)
-        vim.keymap.set("n", "<leader>ld", vim.diagnostic.open_float, opts)
         vim.keymap.set("n", "[d", vim.diagnostic.goto_next, opts)
         vim.keymap.set("n", "]d", vim.diagnostic.goto_prev, opts)
-        vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action, opts)
-        vim.keymap.set("n", "<leader>lR", vim.lsp.buf.references, opts)
-        vim.keymap.set("n", "<leader>lr", vim.lsp.buf.rename, opts)
         vim.keymap.set("i", "<C-h>", vim.lsp.buf.signature_help, opts)
-        vim.keymap.set("n", "<leader>=", vim.lsp.buf.format, opts)
+
+        wk.register({
+            l = {
+                name = 'LSP',
+                a = { vim.lsp.buf.code_action, "Code Action" },
+                w = { vim.lsp.buf.workspace_symbol, "Workspace Symbols" },
+                d = { vim.diagnostic.open_float, "Diagnostic" },
+                R = { vim.lsp.buf.references, "References" },
+                r = { vim.lsp.buf.rename, "Rename" },
+                f = { vim.lsp.buf.format, "Format" },
+            },
+        }, { prefix = '<leader>', buffer = bufnr })
+
     end)
 
     lsp.setup()
