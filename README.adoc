@@ -26,3 +26,4 @@ https://asciinema.org/a/H9GYokb2PNiCQmu3313LLBQsO
 - https://www.twitch.tv/videos/1668299649
     - starts 1:40:00
 - https://www.youtube.com/watch?v=w7i4amO_zaE
+- https://github.com/folke/dot
