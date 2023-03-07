@@ -1,11 +1,11 @@
 local M = {}
+local gs = require("gitsigns");
+local wk = require("which-key");
 
 function M.setup()
-    local gs = require("gitsigns");
-
     gs.setup({})
 
-    require("which-key").register({
+    wk.register({
         g = {
             name = "Git",
             j = { function() gs.next_hunk({ navigation_message = false }) end, "Next Hunk" },

@@ -18,9 +18,10 @@ local mugvim_banner = {
     "",
 }
 
-function M.setup()
-    local dashboard = require('dashboard')
+local dashboard = require('dashboard')
+local cwk = require('mugvim.core.which-key')
 
+function M.setup()
     dashboard.custom_center = {
         { icon = '  ',
             desc = 'New Buffer                              ',
@@ -28,7 +29,7 @@ function M.setup()
             shortcut = ':DashboardNewFile' },
         { icon = '  ',
             desc = 'Edit User Configuration                 ',
-            action = require('mugvim.core.which-key').edit_userconfig,
+            action = cwk.edit_userconfig,
             shortcut = 'SPC + c          ' },
     }
 

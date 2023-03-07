@@ -4,7 +4,7 @@ function M.setup()
     local lsp = require('lsp-zero')
     local wk = require('which-key')
 
-    require("which-key").register({
+    wk.register({
         l = {
             name = "LSP",
             ["="] = { name = "Format" }
@@ -16,7 +16,7 @@ function M.setup()
     lsp.ensure_installed({
         'tsserver',
         'eslint',
-        'sumneko_lua',
+        'lua-language-server',
         'rust_analyzer',
         'jdtls',
     })

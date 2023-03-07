@@ -1,7 +1,5 @@
 local M = {}
 
-local fs = require('mugvim.fs')
-
 function M.install_lazy()
     local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
     vim.opt.runtimepath:prepend(lazypath)
@@ -39,6 +37,13 @@ function M.setup()
             config = function()
                 require('mugvim.core.tokyonight').setup()
             end,
+        },
+        'folke/trouble.nvim',
+        {
+            requires = 'nvim-tree/nvim-web-devicons',
+            config = function()
+                require('mugvim.core.trouble').setup()
+            end
         },
         'rose-pine/neovim',
         {
