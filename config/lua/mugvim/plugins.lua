@@ -38,13 +38,15 @@ function M.setup()
                 require('mugvim.core.tokyonight').setup()
             end,
         },
-        'folke/trouble.nvim',
+
         {
-            requires = 'nvim-tree/nvim-web-devicons',
+            'folke/trouble.nvim',
+            dependencies = { 'nvim-tree/nvim-web-devicons' },
             config = function()
                 require('mugvim.core.trouble').setup()
             end
         },
+
         'rose-pine/neovim',
         {
             'sainnhe/everforest',

@@ -16,7 +16,6 @@ function M.setup()
     lsp.ensure_installed({
         'tsserver',
         'eslint',
-        'lua-language-server',
         'rust_analyzer',
         'jdtls',
     })
