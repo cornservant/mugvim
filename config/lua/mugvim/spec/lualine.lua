@@ -1,5 +1,3 @@
-local M = {}
-
 -- these settings are mostly yoinked from LunarVIM
 
 local icons = require 'lvim.icons'
@@ -103,48 +101,52 @@ local lsp = {
     color = { gui = "bold" },
 }
 
-function M.setup()
-    require('lualine').setup({
-        options = {
-            icons_enabled = true,
-            theme = 'auto',
-            component_separators = { left = '', right = '' },
-            section_separators = { left = '', right = '' },
-            disabled_filetypes = {
-                "dashboard",
-                statusline = {},
-                winbar = {},
+return {
+    'nvim-lualine/lualine.nvim',
+    dependencies = {
+        'nvim-tree/nvim-web-devicons',
+    },
+    config = function()
+        require('lualine').setup({
+            options = {
+                icons_enabled = true,
+                theme = 'auto',
+                component_separators = { left = '', right = '' },
+                section_separators = { left = '', right = '' },
+                disabled_filetypes = {
+                    "dashboard",
+                    statusline = {},
+                    winbar = {},
+                },
+                ignore_focus = {},
+                always_divide_middle = true,
+                globalstatus = true,
+                refresh = {
+                    statusline = 1000,
+                    tabline = 1000,
+                    winbar = 1000,
+                }
             },
-            ignore_focus = {},
-            always_divide_middle = true,
-            globalstatus = true,
-            refresh = {
-                statusline = 1000,
-                tabline = 1000,
-                winbar = 1000,
-            }
-        },
-        sections = {
-            lualine_a = { mode },
-            lualine_b = { branch },
-            lualine_c = { diff },
-            lualine_x = { diagnostics, lsp, spaces, 'filetype' },
-            lualine_y = { 'location' },
-            lualine_z = { progress }
-        },
-        inactive_sections = {
-            lualine_a = { mode },
-            lualine_b = { branch },
-            lualine_c = { diff },
-            lualine_x = { diagnostics, lsp, spaces, 'filetype' },
-            lualine_y = { 'location' },
-            lualine_z = { progress }
-        },
-        tabline = {},
-        winbar = {},
-        inactive_winbar = {},
-        extensions = {}
-    })
-end
-
-return M
+            sections = {
+                lualine_a = { mode },
+                lualine_b = { branch },
+                lualine_c = { diff },
+                lualine_x = { diagnostics, lsp, spaces, 'filetype' },
+                lualine_y = { 'location' },
+                lualine_z = { progress }
+            },
+            inactive_sections = {
+                lualine_a = { mode },
+                lualine_b = { branch },
+                lualine_c = { diff },
+                lualine_x = { diagnostics, lsp, spaces, 'filetype' },
+                lualine_y = { 'location' },
+                lualine_z = { progress }
+            },
+            tabline = {},
+            winbar = {},
+            inactive_winbar = {},
+            extensions = {}
+        })
+    end,
+}
