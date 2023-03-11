@@ -22,43 +22,7 @@ function M.setup()
 
     local opts = {}
 
-    local plugins = {
-        'folke/lazy.nvim',
-
-        require('mugvim.spec.which-key'),
-        'folke/neodev.nvim',
-        require('mugvim.spec.tokyonight'),
-        require('mugvim.spec.trouble'),
-        'rose-pine/neovim',
-        require('mugvim.spec.everforest'),
-        'cocopon/iceberg.vim',
-        'arcticicestudio/nord-vim',
-        'catppuccin/vim',
-        'morhetz/gruvbox',
-        require('mugvim.spec.onedark'),
-        'tpope/vim-surround',
-        'tpope/vim-repeat',
-        'NoahTheDuke/vim-just',
-        'junegunn/vim-peekaboo',
-        require('mugvim.spec.harpoon'),
-        'editorconfig/editorconfig-vim',
-        require('mugvim.spec.indent_blankline'),
-        require('mugvim.spec.telescope'),
-        require('mugvim.spec.lualine'),
-        require('mugvim.spec.symbols-outline'),
-        require('mugvim.spec.nvim-tree'),
-        require('mugvim.spec.treesitter'),
-        require('mugvim.spec.gitsigns'),
-        require('mugvim.spec.bufferline'),
-        require('mugvim.spec.undotree'),
-        require('mugvim.spec.comment'),
-        require('mugvim.spec.dashboard'),
-        require('mugvim.spec.neogit'),
-        require('mugvim.spec.fugitive'),
-        require('mugvim.spec.lsp'),
-    }
-
-    require('lazy').setup(plugins, opts)
+    require('lazy').setup('spec', opts)
 end
 
 return M
