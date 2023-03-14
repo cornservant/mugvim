@@ -9,9 +9,6 @@ return {
         local nt = require('nvim-tree')
 
         nt.setup({
-            ignore_ft_on_setup = {
-                "dashboard",
-            },
             update_cwd = true,
             update_focused_file = {
                 enable = true,
