@@ -6,9 +6,7 @@ return {
         'nvim-tree/nvim-web-devicons', -- optional, for file icons
     },
     config = function()
-        local nt = require('nvim-tree')
-
-        nt.setup({
+        require('nvim-tree').setup({
             update_cwd = true,
             update_focused_file = {
                 enable = true,
@@ -84,7 +82,7 @@ return {
         })
 
         require("which-key").register({
-            e = { function() nt.toggle(true) end, "Tree" },
+            e = { function() require("nvim-tree.api").tree.toggle() end, "Tree" },
         }, { prefix = "<leader>" })
     end,
 }
