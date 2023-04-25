@@ -4,7 +4,7 @@ return {
     'rose-pine/neovim',
     'cocopon/iceberg.vim',
     'arcticicestudio/nord-vim',
-    'catppuccin/vim',
+    'catppuccin/nvim',
     'morhetz/gruvbox',
     'tpope/vim-surround',
     'tpope/vim-repeat',
