@@ -1,1 +1,1 @@
-require("mugvim.colors").colors("catppuccin-mocha")
+require("mugvim.colors").colors("tokyonight-moon")
