@@ -1,10 +1,10 @@
 return {
     'folke/lazy.nvim',
     'folke/neodev.nvim',
-    'rose-pine/neovim',
+    { 'rose-pine/neovim', name = 'rose-pine' },
     'cocopon/iceberg.vim',
     'arcticicestudio/nord-vim',
-    'catppuccin/nvim',
+    { 'catppuccin/nvim', name = 'catppuccin' },
     'morhetz/gruvbox',
     'tpope/vim-surround',
     'tpope/vim-repeat',
