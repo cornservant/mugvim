@@ -8,6 +8,7 @@
   "cmp-nvim-lua": { "branch": "main", "commit": "f12408bdb54c39c23e67cab726264c10db33ada8" },
   "cmp-path": { "branch": "main", "commit": "91ff86cd9c29299a64f968ebb45846c485725f23" },
   "cmp_luasnip": { "branch": "master", "commit": "18095520391186d634a0045dacaa346291096566" },
+  "crates.nvim": { "branch": "main", "commit": "bb5ce73e9c41865e22329da118d91a565089e4d7" },
   "dashboard-nvim": { "branch": "master", "commit": "0af0ad181db271ef8d5a332f4cfcec9118340497" },
   "doom-themes.nvim": { "branch": "main", "commit": "03d417d3eab71c320744f8da22251715ba6cee53" },
   "editorconfig-vim": { "branch": "master", "commit": "7f4e4dfc58c480d154116614e616d90aac77204d" },
