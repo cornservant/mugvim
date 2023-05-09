@@ -1,1 +1,2 @@
-require("mugvim.colors").colors("tokyonight-moon")
+require("mugvim.colors").colors("tokyonight")
+require("transparent").clear()
