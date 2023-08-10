@@ -103,8 +103,7 @@ return {
                             f = { function() vim.lsp.buf.format { async = true } end, "Format" },
                             l = { require("lsp_lines").toggle, "Toggle lsp_lines" },
                         },
-                    }, { prefix = '<leader>', buffer = bufnr })
-
+                    }, { prefix = '<leader>', buffer = ev.buf })
                 end,
             })
 
