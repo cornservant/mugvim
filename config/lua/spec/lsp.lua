@@ -1,5 +1,8 @@
 return {
     {
+        'nvim-lua/lsp-status.nvim'
+    },
+    {
         "ErichDonGubler/lsp_lines.nvim",
         config = function()
             vim.diagnostic.config({ virtual_text = false })

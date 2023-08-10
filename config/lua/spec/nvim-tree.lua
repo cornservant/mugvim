@@ -1,5 +1,3 @@
-local icons = require("lvim.icons")
-
 return {
     'nvim-tree/nvim-tree.lua',
     dependencies = {
