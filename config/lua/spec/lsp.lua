@@ -53,85 +53,60 @@ return {
         end
     },
     {
-        'VonHeikemen/lsp-zero.nvim',
-        lazy = false,
-        branch = 'v2.x',
-        dependencies = {
-            -- LSP Support
-            { 'neovim/nvim-lspconfig' },
-            {
-                'williamboman/mason.nvim',
-                build = function()
-                    pcall(vim.cmd, 'MasonUpdate')
-                end,
-            },
-            { 'williamboman/mason-lspconfig.nvim' },
-
-            -- Autocompletion
-            { 'hrsh7th/nvim-cmp' },
-            { 'hrsh7th/cmp-nvim-lsp' },
-            { 'hrsh7th/cmp-buffer' },
-            { 'hrsh7th/cmp-path' },
-            { 'hrsh7th/cmp-nvim-lua' },
-            { 'saadparwaiz1/cmp_luasnip' },
-
-            -- Snippets
-            -- { 'L3MON4D3/LuaSnip' },
-            -- { 'rafamadriz/friendly-snippets' },
-
-            -- LSP lines
-            { 'ErichDonGubler/lsp_lines.nvim' },
-        },
+        'neovim/nvim-lspconfig',
         config = function()
-            local lsp = require('lsp-zero').preset({
-                set_sources = 'recommended',
+            local lspconfig = require('lspconfig')
+
+            lspconfig.eslint.setup {
+            }
+
+            lspconfig.tsserver.setup {
+            }
+
+            lspconfig.tailwindcss.setup {
+            }
+
+            lspconfig.rust_analyzer.setup {
+            }
+
+            lspconfig.lua_ls.setup {
+            }
+
+            lspconfig.jdtls.setup {
+            }
+
+            -- Use LspAttach autocommand to only map the following keys
+            -- after the language server attaches to the current buffer
+            vim.api.nvim_create_autocmd('LspAttach', {
+                group = vim.api.nvim_create_augroup('UserLspConfig', {}),
+                callback = function(ev)
+                    -- Enable completion triggered by <c-x><c-o>
+                    vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
+
+                    local opts = { buffer = ev.buf, remap = false }
+
+                    -- See `:help vim.lsp.*` for documentation on any of the below functions
+                    vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+                    vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+                    vim.keymap.set("n", "[d", vim.diagnostic.goto_next, opts)
+                    vim.keymap.set("n", "]d", vim.diagnostic.goto_prev, opts)
+                    vim.keymap.set("i", "<C-h>", vim.lsp.buf.signature_help, opts)
+
+                    require('which-key').register({
+                        l = {
+                            name = 'LSP',
+                            a = { vim.lsp.buf.code_action, "Code Action" },
+                            w = { vim.lsp.buf.workspace_symbol, "Workspace Symbols" },
+                            d = { vim.diagnostic.open_float, "Diagnostic" },
+                            R = { vim.lsp.buf.references, "References" },
+                            r = { vim.lsp.buf.rename, "Rename" },
+                            f = { function() vim.lsp.buf.format { async = true } end, "Format" },
+                            l = { require("lsp_lines").toggle, "Toggle lsp_lines" },
+                        },
+                    }, { prefix = '<leader>', buffer = bufnr })
+
+                end,
             })
-
-            lsp.ensure_installed({
-                'tsserver',
-                'eslint',
-                'rust_analyzer',
-                'jdtls',
-            })
-
-            lsp.set_sign_icons({
-                error = '✘',
-                warn = '▲',
-                hint = '⚑',
-                info = '»',
-            })
-
-            lsp.on_attach(function(client, bufnr)
-                lsp.default_keymaps({buffer = bufnr})
-
-                local opts = { buffer = bufnr, remap = false }
-
-                if client.name == "eslint" then
-                    vim.cmd.LspStop('eslint')
-                    return
-                end
-
-                vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-                vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
-                vim.keymap.set("n", "[d", vim.diagnostic.goto_next, opts)
-                vim.keymap.set("n", "]d", vim.diagnostic.goto_prev, opts)
-                vim.keymap.set("i", "<C-h>", vim.lsp.buf.signature_help, opts)
-
-                require('which-key').register({
-                    l = {
-                        name = 'LSP',
-                        a = { vim.lsp.buf.code_action, "Code Action" },
-                        w = { vim.lsp.buf.workspace_symbol, "Workspace Symbols" },
-                        d = { vim.diagnostic.open_float, "Diagnostic" },
-                        R = { vim.lsp.buf.references, "References" },
-                        r = { vim.lsp.buf.rename, "Rename" },
-                        f = { vim.lsp.buf.format, "Format" },
-                        l = { require("lsp_lines").toggle, "Toggle lsp_lines" },
-                    },
-                }, { prefix = '<leader>', buffer = bufnr })
-            end)
-
-            lsp.setup()
 
             local cmp = require('cmp')
 
@@ -144,6 +119,6 @@ return {
             vim.diagnostic.config({
                 virtual_text = true,
             })
-        end,
-    }
+        end
+    },
 }
