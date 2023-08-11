@@ -1,19 +1,16 @@
 local M = {}
 
-local mugvim_banner = {
+local banner = {
     "",
     "",
-    "888b     d888                  888     888 8888888 888b     d888",
-    "8888b   d8888                  888     888   888   8888b   d8888",
-    "88888b.d88888                  888     888   888   88888b.d88888",
-    "888Y88888P888 888  888  .d88b. Y88b   d88P   888   888Y88888P888",
-    "888 Y888P 888 888  888 d88P\"88b Y88b d88P    888   888 Y888P 888",
-    "888  Y8P  888 888  888 888  888  Y88o88P     888   888  Y8P  888",
-    "888   \"   888 Y88b 888 Y88b 888   Y888P      888   888   \"   888",
-    "888       888  \"Y88888  \"Y88888    Y8P     8888888 888       888",
-    "                            888                                 ",
-    "                       Y8b d88P                                 ",
-    "                        \"Y88P\"                                  ",
+    "  /\\_/\\  ",
+    " ( o.o ) ",
+    "  > ^ <  ",
+    "",
+    "マッグヴィム",
+    "",
+    "in Gedenken an",
+    "Bram Moolenaar",
     "",
     "",
 }
@@ -35,26 +32,37 @@ return {
             theme = 'doom',
 
             config = {
-                header = mugvim_banner,
-
+                header = banner,
                 center = {
                     {
-                        icon = '  ',
-                        desc = 'New Buffer                              ',
+                        icon = '󰝒  ',
+                        desc = 'New Buffer             ',
                         action = function() vim.cmd('enew') end,
-                        shortcut = ':DashboardNewFile'
+                        key = 'n',
                     },
                     {
-                        icon = '󱦺  ',
-                        desc = 'Recent Files                            ',
-                        action = require('telescope.builtin').oldfiles,
-                        shortcut = ':Telescope oldfiles'
+                        icon = '󱋡  ',
+                        desc = 'Recent Files           ',
+                        action = require 'telescope.builtin'.oldfiles,
+                        key = 'r',
                     },
                     {
-                        icon = '  ',
-                        desc = 'Edit User Configuration                 ',
+                        icon = '󰈞  ',
+                        desc = 'Find Files             ',
+                        action = require 'telescope.builtin'.find_files,
+                        key = '/',
+                    },
+                    {
+                        icon = '󰊢  ',
+                        desc = 'Git Status             ',
+                        action = require 'telescope.builtin'.git_status,
+                        key = 's',
+                    },
+                    {
+                        icon = '󰒓  ',
+                        desc = 'Edit User Configuration',
                         action = M.edit_userconfig,
-                        shortcut = 'SPC + c          '
+                        key = 'e',
                     },
                 },
             }
