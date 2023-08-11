@@ -64,6 +64,12 @@ return {
                         action = M.edit_userconfig,
                         key = 'e',
                     },
+                    {
+                        icon = '󰗶  ',
+                        desc = 'Check Health           ',
+                        action = function() vim.cmd("checkhealth") end,
+                        key = 'h',
+                    },
                 },
             }
         }
