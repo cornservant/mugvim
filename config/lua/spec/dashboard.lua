@@ -50,6 +50,12 @@ return {
                         icon = '󰈞  ',
                         desc = 'Find Files             ',
                         action = require 'telescope.builtin'.find_files,
+                        key = 'f',
+                    },
+                    {
+                        icon = '󰈲  ',
+                        desc = 'Grep Files             ',
+                        action = require 'telescope.builtin'.find_files,
                         key = '/',
                     },
                     {
