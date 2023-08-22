@@ -55,7 +55,7 @@ return {
                     {
                         icon = '󰈲  ',
                         desc = 'Grep Files             ',
-                        action = require 'telescope.builtin'.find_files,
+                        action = require 'telescope.builtin'.live_grep,
                         key = '/',
                     },
                     {
