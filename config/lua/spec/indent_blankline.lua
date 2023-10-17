@@ -1,13 +1,21 @@
 return {
     'lukas-reineke/indent-blankline.nvim',
     config = function()
-        require("indent_blankline").setup({
-            show_current_context = false,
-            show_current_context_start = false,
+        require("ibl").setup({
+            enabled = true,
+            exclude = {
+                filetypes = {
+                    "dashboard",
+                    "lspinfo",
+                    "checkhealth",
+                    "help",
+                    "man",
+                    "gitcommit",
+                    "TelescopePrompt",
+                    "TelescopeResults",
+                    "",
+                },
+            },
         })
-
-        local list = vim.g.indent_blankline_filetype_exclude
-        table.insert(list, "dashboard")
-        vim.g.indent_blankline_filetype_exclude = list
     end,
 }
