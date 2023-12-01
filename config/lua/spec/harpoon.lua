@@ -5,6 +5,8 @@ return {
     config = function()
         local harpoon = require("harpoon")
 
+        harpoon:setup()
+
         require("which-key").register({
             a = { function() harpoon:list():append() end, "Harpoon Append" },
         }, { prefix = "<leader>" })
