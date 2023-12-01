@@ -1,14 +1,14 @@
 return {
     'theprimeagen/harpoon',
+    branch = "harpoon2",
     dependencies = { 'nvim-lua/plenary.nvim' },
     config = function()
-        local ui = require("harpoon.ui")
-        local mark = require("harpoon.mark")
+        local harpoon = require("harpoon")
 
         require("which-key").register({
-            a = { mark.add_file, "Harpoon Mark" },
+            a = { function() harpoon:list():append() end, "Harpoon Append" },
         }, { prefix = "<leader>" })
 
-        vim.keymap.set("n", "<C-e>", ui.toggle_quick_menu)
+        vim.keymap.set("n", "<C-e>", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
     end,
 }
