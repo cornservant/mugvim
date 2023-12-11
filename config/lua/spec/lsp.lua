@@ -17,33 +17,33 @@ return {
             'hrsh7th/cmp-nvim-lsp',
         },
         config = function()
-              -- Set up nvim-cmp.
-              local cmp = require'cmp'
+            -- Set up nvim-cmp.
+            local cmp = require 'cmp'
 
-              cmp.setup({
-                  snippet = {
-                      expand = function(args)
-                          vim.fn["vsnip#anonymous"](args.body)
-                      end,
-                  },
-                  window = {
-                      -- completion = cmp.config.window.bordered(),
-                      -- documentation = cmp.config.window.bordered(),
-                  },
-                  mapping = cmp.mapping.preset.insert({
-                      ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-                      ['<C-f>'] = cmp.mapping.scroll_docs(4),
-                      ['<C-Space>'] = cmp.mapping.complete(),
-                      ['<C-e>'] = cmp.mapping.abort(),
-                      ['<CR>'] = cmp.mapping.confirm({ select = true }),
-                  }),
-                  sources = cmp.config.sources({
-                      { name = 'nvim_lsp' },
-                      { name = 'vsnip' },
-                  }, {
-                      { name = 'buffer' },
-                  })
-              })
+            cmp.setup({
+                snippet = {
+                    expand = function(args)
+                        vim.fn["vsnip#anonymous"](args.body)
+                    end,
+                },
+                window = {
+                    -- completion = cmp.config.window.bordered(),
+                    -- documentation = cmp.config.window.bordered(),
+                },
+                mapping = cmp.mapping.preset.insert({
+                    ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+                    ['<C-f>'] = cmp.mapping.scroll_docs(4),
+                    ['<C-Space>'] = cmp.mapping.complete(),
+                    ['<C-e>'] = cmp.mapping.abort(),
+                    ['<CR>'] = cmp.mapping.confirm({ select = true }),
+                }),
+                sources = cmp.config.sources({
+                    { name = 'nvim_lsp' },
+                    { name = 'vsnip' },
+                }, {
+                    { name = 'buffer' },
+                })
+            })
         end
     },
     {
@@ -96,6 +96,12 @@ return {
                     vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
                     vim.keymap.set("n", "[d", vim.diagnostic.goto_next, opts)
                     vim.keymap.set("n", "]d", vim.diagnostic.goto_prev, opts)
+                    vim.keymap.set("n", "[e", function()
+                        vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.ERROR })
+                    end, opts)
+                    vim.keymap.set("n", "]e", function()
+                        vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity.ERROR })
+                    end, opts)
                     vim.keymap.set("i", "<C-h>", vim.lsp.buf.signature_help, opts)
 
                     require('which-key').register({
@@ -117,7 +123,7 @@ return {
 
             cmp.setup({
                 mapping = {
-                    ['<CR>'] = cmp.mapping.confirm({select = false}),
+                    ['<CR>'] = cmp.mapping.confirm({ select = false }),
                 }
             })
 
