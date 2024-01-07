@@ -2,54 +2,27 @@ return {
     'nvim-telescope/telescope.nvim',
     branch = '0.1.x',
     dependencies = { 'nvim-lua/plenary.nvim' },
-    config = function()
-        local builtin = require 'telescope.builtin'
-
-        require('which-key').register({
-            b = {
-                name = 'Buffer',
-                b = { builtin.buffers, 'Buffers' },
-            },
-            f = {
-                name = 'File',
-                g = { builtin.git_files, 'Git Files' },
-                r = { builtin.oldfiles, 'Recent Files' },
-                f = { builtin.find_files, 'Files' },
-            },
-            g = {
-                name = 'Git',
-                t = {
-                    name = 'Telescope',
-                    b = { builtin.git_branches, 'Branches' },
-                    c = { builtin.git_commits, 'Commits' },
-                    s = { builtin.git_status, 'Status' },
-                    S = { builtin.git_stash, 'Stash' },
-                },
-            },
-            s = {
-                name = 'Search',
-                b = { builtin.current_buffer_fuzzy_find, 'Search in Buffer' },
-                t = { builtin.live_grep, 'Live Grep' },
-                v = { builtin.treesitter, 'Treesitter' },
-            },
-            t = {
-                name = 'Telescope',
-                b = { builtin.builtin, 'Builtins' },
-                m = { builtin.marks, 'Marks' },
-                j = { builtin.jumplist, 'Jumplist' },
-                r = { builtin.registers, 'Registers' },
-                h = {
-                    name = "History",
-                    c = { builtin.search_history, "Command History" },
-                    s = { builtin.search_history, "Search History" },
-                    q = { builtin.quickfixhistory, "Quickfix History" },
-                },
-            },
-            ["+"] = {
-                c = { builtin.commands, 'Commands' },
-                s = { builtin.colorscheme, 'Colorschemes' },
-                k = { builtin.keymaps, 'Keymaps' },
-            }
-        }, { prefix = '<leader>' })
-    end,
+    keys = {
+        { "<leader>bb", function() require('telescope.builtin').buffers() end, desc = 'Buffers' },
+        { "<leader>fg", function() require('telescope.builtin').git_files() end, desc = 'Git Files' },
+        { "<leader>fr", function() require('telescope.builtin').oldfiles() end, desc = 'Recent Files' },
+        { "<leader>ff", function() require('telescope.builtin').find_files() end, desc = 'Files' },
+        { "<leader>gtb", function() require('telescope.builtin').git_branches() end, desc = 'Branches' },
+        { "<leader>gtc", function() require('telescope.builtin').git_commits() end, desc = 'Commits' },
+        { "<leader>gts", function() require('telescope.builtin').git_status() end, desc = 'Status' },
+        { "<leader>gtS", function() require('telescope.builtin').git_stash() end, desc = 'Stash' },
+        { "<leader>sb", function() require('telescope.builtin').current_buffer_fuzzy_find() end, desc = 'Search in Buffer' },
+        { "<leader>st", function() require('telescope.builtin').live_grep() end, desc = 'Live Grep' },
+        { "<leader>sv", function() require('telescope.builtin').treesitter() end, desc = 'Treesitter' },
+        { "<leader>tb", function() require('telescope.builtin').builtin() end, desc = 'Builtins' },
+        { "<leader>tm", function() require('telescope.builtin').marks() end, desc = 'Marks' },
+        { "<leader>tj", function() require('telescope.builtin').jumplist() end, desc = 'Jumplist' },
+        { "<leader>tr", function() require('telescope.builtin').registers() end, desc = 'Registers' },
+        { "<leader>thc", function() require('telescope.builtin').search_history() end, desc = "Command History" },
+        { "<leader>ths", function() require('telescope.builtin').search_history() end, desc = "Search History" },
+        { "<leader>thq", function() require('telescope.builtin').quickfixhistory() end, desc = "Quickfix History" },
+        { "<leader>+c", function() require('telescope.builtin').commands() end, desc = 'Commands' },
+        { "<leader>+s", function() require('telescope.builtin').colorscheme() end, desc = 'Colorschemes' },
+        { "<leader>+k", function() require('telescope.builtin').keymaps() end, desc = 'Keymaps' },
+    }
 }

@@ -3,14 +3,16 @@ return {
     branch = "harpoon2",
     dependencies = { 'nvim-lua/plenary.nvim' },
     config = function()
-        local harpoon = require("harpoon")
-
-        harpoon:setup()
-
-        require("which-key").register({
-            a = { function() harpoon:list():append() end, "Harpoon Append" },
-        }, { prefix = "<leader>" })
-
-        vim.keymap.set("n", "<C-e>", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
+        require("harpoon"):setup({})
     end,
+    keys = {
+        { "<leader>a", function() require('harpoon'):list():append() end, desc = "Harpoon Append" },
+        {
+            "<C-e>",
+            function()
+                require('harpoon').ui:toggle_quick_menu(require('harpoon'):list())
+            end,
+            desc = "Harpoon List"
+        }
+    }
 }

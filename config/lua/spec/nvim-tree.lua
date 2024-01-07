@@ -1,5 +1,6 @@
 return {
     'nvim-tree/nvim-tree.lua',
+    lazy = false,
     dependencies = {
         'nvim-tree/nvim-web-devicons', -- optional, for file icons
     },
@@ -52,9 +53,8 @@ return {
                 require_confirm = true,
             },
         })
-
-        require("which-key").register({
-            e = { function() require("nvim-tree.api").tree.toggle() end, "Tree" },
-        }, { prefix = "<leader>" })
     end,
+    keys = {
+        { "<leader>e", function() require("nvim-tree.api").tree.toggle({ update_root = true}) end, desc = "Tree" },
+    },
 }
