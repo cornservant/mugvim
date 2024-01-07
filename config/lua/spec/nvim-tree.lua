@@ -55,6 +55,6 @@ return {
         })
     end,
     keys = {
-        { "<leader>e", function() require("nvim-tree.api").tree.toggle({ update_root = true}) end, desc = "Tree" },
+        { "<leader>ft", function() require("nvim-tree.api").tree.toggle({ update_root = true }) end, desc = "Tree" },
     },
 }
