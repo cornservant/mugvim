@@ -14,7 +14,7 @@ return {
     },
     'GustavoPrietoP/doom-themes.nvim',
     'eddyekofo94/gruvbox-flat.nvim',
-    -- 'tpope/vim-surround',
+    'tpope/vim-surround',
     'tpope/vim-repeat',
     'NoahTheDuke/vim-just',
     'junegunn/vim-peekaboo',
