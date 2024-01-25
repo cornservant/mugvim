@@ -1,3 +1,15 @@
+function setup_lsp_if_binary_exists(lsp, opts)
+    local lspconfig = require('lspconfig')
+    local entry = lspconfig[lsp]
+    local command = entry.document_config.default_config.cmd[1]
+    if vim.fn.executable(command) == 1 then
+        -- print("LSP     found: " .. command)
+        entry.setup(opts)
+    else
+        -- print("    not found: " .. command)
+    end
+end
+
 return {
     {
         'nvim-lua/lsp-status.nvim'
@@ -53,33 +65,63 @@ return {
             'hrsh7th/cmp-nvim-lsp',
         },
         config = function()
-            local lspconfig = require('lspconfig')
-
             local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
-            lspconfig.eslint.setup {
+            setup_lsp_if_binary_exists('eslint', {
                 capabilities = capabilities,
-            }
+            })
 
-            lspconfig.tsserver.setup {
+            setup_lsp_if_binary_exists('tsserver', {
                 capabilities = capabilities,
-            }
+            })
 
-            lspconfig.tailwindcss.setup {
+            setup_lsp_if_binary_exists('tailwindcss', {
                 capabilities = capabilities,
-            }
+            })
 
-            lspconfig.rust_analyzer.setup {
+            setup_lsp_if_binary_exists('rust_analyzer', {
                 capabilities = capabilities,
-            }
+            })
 
-            lspconfig.lua_ls.setup {
+            setup_lsp_if_binary_exists('lua_ls', {
                 capabilities = capabilities,
-            }
+            })
 
-            lspconfig.jdtls.setup {
+            setup_lsp_if_binary_exists('jdtls', {
                 capabilities = capabilities,
-            }
+            })
+
+            setup_lsp_if_binary_exists('nixd', {
+                capabilities = capabilities,
+            })
+
+            setup_lsp_if_binary_exists('typst_lsp', {
+                capabilities = capabilities,
+            })
+
+            setup_lsp_if_binary_exists('ruff_lsp', {
+                capabilities = capabilities,
+            })
+
+            setup_lsp_if_binary_exists('bashls', {
+                capabilities = capabilities,
+            })
+
+            setup_lsp_if_binary_exists('erlangls', {
+                capabilities = capabilities,
+            })
+
+            setup_lsp_if_binary_exists('kotlin_language_server', {
+                capabilities = capabilities,
+            })
+
+            setup_lsp_if_binary_exists('nginx_language_server', {
+                capabilities = capabilities,
+            })
+
+            setup_lsp_if_binary_exists('ocamllsp', {
+                capabilities = capabilities,
+            })
 
             -- Use LspAttach autocommand to only map the following keys
             -- after the language server attaches to the current buffer
