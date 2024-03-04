@@ -8,3 +8,7 @@ https://asciinema.org/a/H9GYokb2PNiCQmu3313LLBQsO
 - find a useful, but rather minimal core
 - be extensible
 - ability to run different neovim profiles independently
+
+== NixOS
+
+Enable `nix-ld` in order to run lsp server binaries downloaded by Mason.
