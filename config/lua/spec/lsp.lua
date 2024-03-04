@@ -12,6 +12,9 @@ end
 
 return {
     {
+        'folke/neodev.nvim'
+    },
+    {
         'williamboman/mason.nvim'
     },
     {
@@ -73,6 +76,7 @@ return {
         config = function()
             require('mason').setup()
             require('mason-lspconfig').setup()
+            require('neodev').setup()
 
             local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
@@ -92,9 +96,16 @@ return {
             --     capabilities = capabilities,
             -- })
             --
-            -- setup_lsp_if_binary_exists('lua_ls', {
-            --     capabilities = capabilities,
-            -- })
+            setup_lsp_if_binary_exists('lua_ls', {
+                capabilities = capabilities,
+                settings = {
+                    Lua = {
+                        completion = {
+                            callSnippet = "Replace"
+                        }
+                    }
+                },
+            })
             --
             -- setup_lsp_if_binary_exists('jdtls', {
             --     capabilities = capabilities,
