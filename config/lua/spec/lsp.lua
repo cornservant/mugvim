@@ -10,6 +10,25 @@ function setup_lsp_if_binary_exists(lsp, opts)
     end
 end
 
+function setup_markdown_oxide(on_attach)
+    if vim.fn.executable("markdown-oxide") == 1 then
+        -- An example nvim-lspconfig capabilities setting
+        local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
+
+        -- Ensure that dynamicRegistration is enabled! This allows the LS to take into account actions like the
+        -- Create Unresolved File code action, resolving completions for unindexed code blocks, ...
+        capabilities.workspace = {
+            didChangeWatchedFiles = {
+                dynamicRegistration = true,
+            },
+        }
+
+        require("lspconfig").markdown_oxide.setup({
+            capabilities = capabilities,
+        })
+    end
+end
+
 return {
     {
         'folke/neodev.nvim'
@@ -142,6 +161,7 @@ return {
             -- setup_lsp_if_binary_exists('ocamllsp', {
             --     capabilities = capabilities,
             -- })
+            setup_markdown_oxide()
 
             -- Use LspAttach autocommand to only map the following keys
             -- after the language server attaches to the current buffer
