@@ -103,10 +103,11 @@ return {
             --     capabilities = capabilities,
             -- })
             --
-            -- setup_lsp_if_binary_exists('tsserver', {
-            --     capabilities = capabilities,
-            -- })
-            --
+
+            setup_lsp_if_binary_exists('ts_ls', {
+                capabilities = capabilities,
+            })
+
             -- setup_lsp_if_binary_exists('tailwindcss', {
             --     capabilities = capabilities,
             -- })
