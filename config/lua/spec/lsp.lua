@@ -187,18 +187,16 @@ return {
                     end, opts)
                     vim.keymap.set("i", "<C-h>", vim.lsp.buf.signature_help, opts)
 
-                    require('which-key').register({
-                        l = {
-                            name = 'LSP',
-                            a = { vim.lsp.buf.code_action, "Code Action" },
-                            w = { vim.lsp.buf.workspace_symbol, "Workspace Symbols" },
-                            d = { vim.diagnostic.open_float, "Diagnostic" },
-                            R = { vim.lsp.buf.references, "References" },
-                            r = { vim.lsp.buf.rename, "Rename" },
-                            f = { function() vim.lsp.buf.format { async = true } end, "Format" },
-                            l = { require("lsp_lines").toggle, "Toggle lsp_lines" },
-                        },
-                    }, { prefix = '<leader>', buffer = ev.buf })
+                    require('which-key').add({
+                        { "<leader>l",  buffer = ev.buf,                                    group = "LSP" },
+                        { "<leader>lR", vim.lsp.buf.references,                             buffer = ev.buf, desc = "References" },
+                        { "<leader>la", vim.lsp.buf.code_action,                            buffer = ev.buf, desc = "Code Action" },
+                        { "<leader>ld", vim.diagnostic.open_float,                          buffer = ev.buf, desc = "Diagnostic" },
+                        { "<leader>lf", function() vim.lsp.buf.format { async = true } end, buffer = ev.buf, desc = "Format" },
+                        { "<leader>ll", require("lsp_lines").toggle,                        buffer = ev.buf, desc = "Toggle lsp_lines" },
+                        { "<leader>lr", vim.lsp.buf.rename,                                 buffer = ev.buf, desc = "Rename" },
+                        { "<leader>lw", vim.lsp.buf.workspace_symbol,                       buffer = ev.buf, desc = "Workspace Symbols" },
+                    })
                 end,
             })
 
