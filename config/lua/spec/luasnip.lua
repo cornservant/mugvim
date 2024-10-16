@@ -1,5 +1,16 @@
 local mugvimPaths = require("mugvim.bootstrap")
 
+local snippet_path = mugvimPaths.base_dir .. "/snippets"
+
+local loadSnippets = function()
+    require("luasnip.loaders.from_snipmate")
+        .lazy_load({ paths = snippet_path })
+end
+
+local openSnippets = function()
+    vim.cmd.edit(snippet_path)
+end
+
 return {
     "L3MON4D3/LuaSnip",
     lazy = false,
@@ -22,9 +33,15 @@ return {
             end
         end
 
-        vim.keymap.set({ "i", "s" }, "<Tab>", function() expand_or_jump(1) end, { remap = false })
-        vim.keymap.set({ "i", "s" }, "<S-Tab>", function() expand_or_jump(-1) end, { remap = false })
+        vim.keymap.set({"i", "s"}, "<Tab>", function() expand_or_jump(1) end, { remap = false })
+        vim.keymap.set({"i", "s"}, "<S-Tab>", function() expand_or_jump(-1) end, { remap = false })
 
-        require("luasnip.loaders.from_snipmate").lazy_load({ paths = mugvimPaths.base_dir .. "/snippets" })
+        loadSnippets()
+
+        require('which-key').add({
+            { "<leader>S", group = "Snippets" },
+            { "<leader>Sr", loadSnippets, desc = "Reload snippets" },
+            { "<leader>So", openSnippets, desc = "Open snippets" },
+        })
     end,
 }
