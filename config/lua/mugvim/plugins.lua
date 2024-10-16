@@ -20,7 +20,15 @@ end
 function M.setup()
     M.install_lazy()
 
-    local opts = {}
+    local opts = {
+        change_detection = {
+            enabled = false,
+        },
+        profiling = {
+            loader = true,
+            require = true,
+        },
+    }
 
     require('lazy').setup('spec', opts)
 end
