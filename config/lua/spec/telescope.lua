@@ -3,7 +3,7 @@ return {
     branch = '0.1.x',
     dependencies = { 'nvim-lua/plenary.nvim' },
     keys = {
-        { "<leader>bt",  function() require('telescope.builtin').buffers() end,                   desc = 'Buffers (telescope)' },
+        { "<leader>bb",  function() require('telescope.builtin').buffers() end,                   desc = 'Buffers (telescope)' },
         { "<leader>fg",  function() require('telescope.builtin').git_files() end,                 desc = 'Git Files' },
         { "<leader>fr",  function() require('telescope.builtin').oldfiles() end,                  desc = 'Recent Files' },
         { "<leader>ff",  function() require('telescope.builtin').find_files() end,                desc = 'Files' },
