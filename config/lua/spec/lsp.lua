@@ -133,11 +133,11 @@ return {
             -- setup_lsp_if_binary_exists('jdtls', {
             --     capabilities = capabilities,
             -- })
-            --
-            -- setup_lsp_if_binary_exists('nixd', {
-            --     capabilities = capabilities,
-            -- })
-            --
+
+            setup_lsp_if_binary_exists('nixd', {
+                capabilities = capabilities,
+            })
+
             -- setup_lsp_if_binary_exists('typst_lsp', {
             --     capabilities = capabilities,
             -- })
