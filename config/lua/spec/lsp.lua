@@ -102,7 +102,6 @@ return {
             -- setup_lsp_if_binary_exists('eslint', {
             --     capabilities = capabilities,
             -- })
-            --
 
             setup_lsp_if_binary_exists('ts_ls', {
                 capabilities = capabilities,
@@ -115,7 +114,11 @@ return {
             -- setup_lsp_if_binary_exists('rust_analyzer', {
             --     capabilities = capabilities,
             -- })
-            --
+
+            setup_lsp_if_binary_exists('ocamllsp', {
+                capabilities = capabilities,
+            })
+
             setup_lsp_if_binary_exists('lua_ls', {
                 capabilities = capabilities,
                 settings = {
