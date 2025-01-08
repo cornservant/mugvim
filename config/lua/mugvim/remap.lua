@@ -16,6 +16,7 @@ function M.setup()
     vim.keymap.set('n', '<C-j>', '<cmd>wincmd j<cr>')
     vim.keymap.set('n', '<C-k>', '<cmd>wincmd k<cr>')
     vim.keymap.set('n', '<C-l>', '<cmd>wincmd l<cr>')
+    vim.keymap.set('t', '<esc><esc>', '<c-\\><c-n>')
 end
 
 return M
