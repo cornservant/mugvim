@@ -110,10 +110,10 @@ return {
             -- setup_lsp_if_binary_exists('tailwindcss', {
             --     capabilities = capabilities,
             -- })
-            --
-            -- setup_lsp_if_binary_exists('rust_analyzer', {
-            --     capabilities = capabilities,
-            -- })
+
+            setup_lsp_if_binary_exists('rust_analyzer', {
+                capabilities = capabilities,
+            })
 
             setup_lsp_if_binary_exists('ocamllsp', {
                 capabilities = capabilities,
