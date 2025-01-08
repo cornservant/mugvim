@@ -164,6 +164,10 @@ return {
             -- })
             setup_markdown_oxide()
 
+            setup_lsp_if_binary_exists('zls', {
+                capabilities = capabilities,
+            })
+
             -- Use LspAttach autocommand to only map the following keys
             -- after the language server attaches to the current buffer
             vim.api.nvim_create_autocmd('LspAttach', {
