@@ -1,39 +1,38 @@
-local M = {}
-
-local banner = {
-    "",
-    "",
-    "  /\\_/\\  ",
-    " ( o.o ) ",
-    "  > ^ <  ",
-    "",
-    "マッグヴィム",
-    "",
-    "in Gedenken an",
-    "Bram Moolenaar",
-    "",
-    "",
-}
-
 local fs = require('mugvim.fs')
 local paths = require('mugvim.bootstrap')
 local userconfig = fs.join_paths(paths.config_dir, 'after', 'plugin', 'userconfig.lua')
 
-function M.edit_userconfig()
+local function edit_userconfig()
     vim.cmd.edit(userconfig)
 end
 
-return {
-    'glepnir/dashboard-nvim',
-    dependencies = { 'nvim-tree/nvim-web-devicons' },
-    event = 'VimEnter',
-    config = function()
-        require('dashboard').setup {
-            theme = 'doom',
+local custom_header = [[
 
-            config = {
-                header = banner,
-                center = {
+
+  /\_/\
+ ( o.o )
+  > ^ <
+
+マッグヴィム
+
+in Gedenken an
+Bram Moolenaar]]
+
+
+return {
+    "folke/snacks.nvim",
+    priority = 1000,
+    lazy = false,
+    ---@type snacks.Config
+    opts = {
+        bigfile = { enabled = true },
+        dashboard = {
+            enabled = true,
+            width = 32,
+            pane_gap = 2,
+            preset = {
+                header = custom_header,
+                keys = {
                     {
                         icon = '󰝒  ',
                         desc = 'New Buffer             ',
@@ -67,7 +66,7 @@ return {
                     {
                         icon = '󰒓  ',
                         desc = 'Edit User Configuration',
-                        action = M.edit_userconfig,
+                        action = edit_userconfig,
                         key = 'e',
                     },
                     {
@@ -77,7 +76,18 @@ return {
                         key = 'h',
                     },
                 },
-            }
-        }
-    end,
+            },
+            sections = {
+                { section = "header" },
+                { section = "keys",   gap = 0, padding = 2 },
+                { section = "startup" },
+            },
+        },
+        indent = {
+            enabled = true,
+            animate = { enabled = false },
+        },
+        notifier = { enabled = true },
+        quickfile = { enabled = true },
+    },
 }
