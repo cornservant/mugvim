@@ -18,6 +18,7 @@ return {
     ---@type snacks.Config
     opts = {
         bigfile = { enabled = true },
+        bufdelete = { enabled = true },
         dashboard = {
             enabled = true,
             width = 32,
