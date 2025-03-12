@@ -1,7 +1,7 @@
 return {
     "epwalsh/obsidian.nvim",
     version = "*",
-    -- BUG: cannot set `enabled = vim.g.mugvim_obsidian_workspaces and true or false`...
+    enabled = vim.g.mugvim_obsidian_workspaces and true or false,
     ft = "markdown",
     dependencies = {
         "nvim-lua/plenary.nvim",

@@ -2,12 +2,16 @@ local M = {}
 
 function M:load_user_config()
     local user_config_path = vim.fn.stdpath("config") .. "/config.lua";
-    pcall(dofile, user_config_path)
+    if vim.fn.filereadable(user_config_path) == 1 then
+        local ok, _ = pcall(dofile, user_config_path)
+        if not ok then
+            vim.notify("error in user config " .. user_config_path, vim.log.levels.ERROR)
+        end
+    end
 end
 
 function M:after_lazy()
     vim.opt.rtp:prepend(M.runtime_path) -- `lazy` fucks up the runtime path, so we fix it here
-    M:load_user_config()
     require('mugvim.autocommands').setup()
     require('mugvim.colors').apply() -- apply colorscheme specified in the user config
     if vim.g.mugvim_transparent then
