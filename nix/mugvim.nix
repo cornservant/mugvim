@@ -1,7 +1,15 @@
 {
   stdenv,
+  lib,
   pkgs,
   makeWrapper,
+  tree-sitter,      # for treesitter
+  zig,              # for treesitter
+  imagemagick,      # for snacks.image
+  typst,            # for snacks.image
+  tectonic,         # for snacks.image
+  ghostscript,      # for snacks.image
+  mermaid-cli,      # for snacks.image
 }:
 stdenv.mkDerivation rec {
   pname = "mugvim";
@@ -27,6 +35,17 @@ stdenv.mkDerivation rec {
 
   postFixup = ''
     wrapProgram "$out/bin/mugvim" \
-        --set MUGVIM_BASE_DIR "$out"
+        --set MUGVIM_BASE_DIR "$out" \
+        --prefix PATH : "${
+            lib.makeBinPath [
+                tree-sitter      # for treesitter
+                zig              # for treesitter
+                imagemagick      # for snacks.image
+                typst            # for snacks.image
+                tectonic         # for snacks.image
+                ghostscript      # for snacks.image
+                mermaid-cli      # for snacks.image
+            ]
+        }"
   '';
 }
