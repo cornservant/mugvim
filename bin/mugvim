@@ -1,6 +1,14 @@
 #!/usr/bin/env sh
 
-MUGVIM_BASE_DIR=$(realpath "$(dirname $0)/..")
+if [ -z "$MUGVIM_BASE_DIR" ]; then
+    MUGVIM_BASE_DIR=$(realpath "$(dirname $0)/..")
+    echo "MUGVIM_BASE_DIR not defined, falling back to $MUGVIM_BASE_DIR"
+fi
+
+if [ ! -d "$MUGVIM_BASE_DIR" ]; then
+    echo "MUGVIM_BASE_DIR=$MUGVIM_BASE_DIR is not a directory"
+    exit 1
+fi
 
 MUGVIM_BASE_DIR=$MUGVIM_BASE_DIR \
     NVIM_APPNAME=mugvim \

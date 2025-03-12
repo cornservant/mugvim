@@ -1,6 +1,7 @@
 {
   stdenv,
   pkgs,
+  makeWrapper,
 }:
 stdenv.mkDerivation rec {
   pname = "mugvim";
@@ -15,8 +16,17 @@ stdenv.mkDerivation rec {
     text = ''NVIM_APPNAME=${pname} ${pkgs.neovim}/bin/nvim -u $out/init.lua "$@"'';
   };
 
+  nativeBuildInputs = [
+    makeWrapper
+  ];
+
   installPhase = ''
     cp -r $src $out
     chmod +x $out/bin/mugvim
+  '';
+
+  postFixup = ''
+    wrapProgram "$out/bin/mugvim" \
+        --set MUGVIM_BASE_DIR "$out"
   '';
 }
