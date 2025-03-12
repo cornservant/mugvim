@@ -73,6 +73,7 @@ return {
             enabled = true,
             animate = { enabled = false },
         },
+        image = { enabled = true },
         notifier = { enabled = true },
         quickfile = { enabled = true },
     },

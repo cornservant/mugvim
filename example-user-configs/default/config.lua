@@ -1,6 +1,5 @@
 require("mugvim.colors").setup("tokyonight")
-
-vim.g.mugvim_autoformat = true
+vim.g.mugvim_autoformat = false
 
 -- TODO: make this a configuration flag
 vim.api.nvim_create_autocmd("FileType", {

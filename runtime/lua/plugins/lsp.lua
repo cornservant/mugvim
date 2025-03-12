@@ -117,26 +117,6 @@ return {
 
             local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
-            -- setup_lsp_if_binary_exists('eslint', {
-            --     capabilities = capabilities,
-            -- })
-
-            setup_lsp_if_binary_exists('ts_ls', {
-                capabilities = capabilities,
-            })
-
-            -- setup_lsp_if_binary_exists('tailwindcss', {
-            --     capabilities = capabilities,
-            -- })
-
-            setup_lsp_if_binary_exists('rust_analyzer', {
-                capabilities = capabilities,
-            })
-
-            setup_lsp_if_binary_exists('ocamllsp', {
-                capabilities = capabilities,
-            })
-
             setup_lsp_if_binary_exists('lua_ls', {
                 capabilities = capabilities,
                 settings = {
@@ -147,47 +127,23 @@ return {
                     }
                 },
             })
-            --
-            -- setup_lsp_if_binary_exists('jdtls', {
-            --     capabilities = capabilities,
-            -- })
-
-            setup_lsp_if_binary_exists('nixd', {
-                capabilities = capabilities,
-            })
-
-            -- setup_lsp_if_binary_exists('typst_lsp', {
-            --     capabilities = capabilities,
-            -- })
-            --
-            -- setup_lsp_if_binary_exists('ruff_lsp', {
-            --     capabilities = capabilities,
-            -- })
-            --
-            -- setup_lsp_if_binary_exists('bashls', {
-            --     capabilities = capabilities,
-            -- })
-            --
-            -- setup_lsp_if_binary_exists('erlangls', {
-            --     capabilities = capabilities,
-            -- })
-            --
-            -- setup_lsp_if_binary_exists('kotlin_language_server', {
-            --     capabilities = capabilities,
-            -- })
-            --
-            -- setup_lsp_if_binary_exists('nginx_language_server', {
-            --     capabilities = capabilities,
-            -- })
-            --
-            -- setup_lsp_if_binary_exists('ocamllsp', {
-            --     capabilities = capabilities,
-            -- })
+            setup_lsp_if_binary_exists('eslint', { capabilities = capabilities })
+            setup_lsp_if_binary_exists('ts_ls', { capabilities = capabilities })
+            setup_lsp_if_binary_exists('tailwindcss', { capabilities = capabilities })
+            setup_lsp_if_binary_exists('rust_analyzer', { capabilities = capabilities })
+            setup_lsp_if_binary_exists('jdtls', { capabilities = capabilities })
+            setup_lsp_if_binary_exists('nixd', { capabilities = capabilities })
+            -- setup_lsp_if_binary_exists('tinymist', { capabilities = capabilities })
+            -- setup_lsp_if_binary_exists('ruff_lsp', { capabilities = capabilities })
+            -- setup_lsp_if_binary_exists('bashls', { capabilities = capabilities })
+            -- setup_lsp_if_binary_exists('erlangls', { capabilities = capabilities })
+            -- setup_lsp_if_binary_exists('kotlin_language_server', { capabilities = capabilities })
+            -- setup_lsp_if_binary_exists('nginx_language_server', { capabilities = capabilities })
+            setup_lsp_if_binary_exists('ocamllsp', { capabilities = capabilities })
+            setup_lsp_if_binary_exists('zls', { capabilities = capabilities })
+            setup_lsp_if_binary_exists('pyright', { capabilities = capabilities })
+            setup_lsp_if_binary_exists('clangd', { capabilities = capabilities })
             setup_markdown_oxide()
-
-            setup_lsp_if_binary_exists('zls', {
-                capabilities = capabilities,
-            })
 
             -- Use LspAttach autocommand to only map the following keys
             -- after the language server attaches to the current buffer

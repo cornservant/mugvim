@@ -1,0 +1,26 @@
+
+snippet letter:
+    #import "@local/letter:1.0.0": letter
+
+    #show: letter.with(
+      sender: [
+        $1 ⋅ $2 ⋅ $3 
+      ],
+      recipient: [
+        $4\
+        $5\
+        $6\
+        $7\
+      ],
+      date: [$8, den $9],
+      subject: [$10],
+      name: [$1],
+    )
+
+    Sehr geehrte Damen und Herren,
+
+
+    $0
+
+
+    Mit freundlichen Grüßen,
