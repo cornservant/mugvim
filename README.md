@@ -34,3 +34,11 @@ vim.g.mugvim_snippets = vim.fn.std("data") .. "/snippets"
 ```lua
 vim.g.mugvim_transparent = true
 ```
+
+### Banner
+
+```lua
+vim.g.mugvim_banner = [[
+... ascii art goes here ...
+]]
+```

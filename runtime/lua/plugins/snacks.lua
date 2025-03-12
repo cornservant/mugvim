@@ -1,4 +1,4 @@
-local custom_header = [[
+local default_header = [[
 
 
   /\_/\
@@ -23,7 +23,7 @@ return {
             width = 32,
             pane_gap = 2,
             preset = {
-                header = custom_header,
+                header = vim.g.mugvim_banner or default_header,
                 keys = {
                     {
                         icon = '󰝒  ',
