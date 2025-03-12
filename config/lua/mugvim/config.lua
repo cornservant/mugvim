@@ -1,8 +1,6 @@
 local M = {}
 
 function M.setup()
-    local fs = require("mugvim.fs")
-
     vim.opt.expandtab = true
     vim.opt.shiftwidth = 4
     vim.opt.softtabstop = 4
@@ -29,8 +27,8 @@ function M.setup()
     vim.opt.cmdheight = 1
     vim.opt.laststatus = 3
     vim.opt.undofile = true
-    vim.opt.undodir = fs.join_paths(vim.fn.stdpath("cache"), "undo")
-    vim.opt.shadafile = fs.join_paths(vim.fn.stdpath("cache"), "mugvim.shada")
+    vim.opt.undodir = vim.fn.stdpath("cache") .. "/undo"
+    vim.opt.shadafile = vim.fn.stdpath("cache") .. "/mugvim.shada"
     vim.opt.showmode = false
     vim.opt.scrolloff = 8
     vim.opt.sidescrolloff = 8

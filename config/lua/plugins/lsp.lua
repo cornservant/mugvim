@@ -29,6 +29,24 @@ function setup_markdown_oxide(on_attach)
     end
 end
 
+local function has_lsp_formatting()
+    local bufnr = vim.api.nvim_get_current_buf()
+    local clients = vim.lsp.get_clients({ bufnr = bufnr })
+
+    if #clients == 0 then
+        return false, "No LSP clients attached to this buffer."
+    end
+
+    for _, client in ipairs(clients) do
+        if client.supports_method("textDocument/formatting") or
+            client.supports_method("textDocument/rangeFormatting") then
+            return true, nil -- LSP supports formatting
+        end
+    end
+
+    return false, "No attached LSP client supports formatting for this buffer."
+end
+
 return {
     {
         'folke/neodev.nvim'
@@ -209,6 +227,16 @@ return {
 
             vim.diagnostic.config({
                 virtual_text = true,
+            })
+
+            vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+                pattern = "*",
+                group = vim.api.nvim_create_augroup("lsp_format_on_save", {}),
+                callback = function()
+                    if has_lsp_formatting() and vim.g.mugvim_autoformat then
+                        vim.lsp.buf.format()
+                    end
+                end,
             })
         end
     },

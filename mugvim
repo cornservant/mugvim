@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
 
-MUGVIM_BASE_DIR=$(dirname $0)
-nvim -u "$MUGVIM_BASE_DIR/init.lua" "$@"
+MUGVIM_BASE_DIR=$(realpath $(dirname $0))
+
+MUGVIM_BASE_DIR=$MUGVIM_BASE_DIR \
+    NVIM_APPNAME=mugvim \
+    exec nvim -u "$MUGVIM_BASE_DIR/init.lua" "$@"

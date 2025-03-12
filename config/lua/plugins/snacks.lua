@@ -1,11 +1,3 @@
-local fs = require('mugvim.fs')
-local paths = require('mugvim.bootstrap')
-local userconfig = fs.join_paths(paths.config_dir, 'after', 'plugin', 'userconfig.lua')
-
-local function edit_userconfig()
-    vim.cmd.edit(userconfig)
-end
-
 local custom_header = [[
 
 
@@ -62,12 +54,6 @@ return {
                         desc = 'Git Status             ',
                         action = require 'telescope.builtin'.git_status,
                         key = 's',
-                    },
-                    {
-                        icon = '󰒓  ',
-                        desc = 'Edit User Configuration',
-                        action = edit_userconfig,
-                        key = 'e',
                     },
                     {
                         icon = '󰗶  ',

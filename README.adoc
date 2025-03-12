@@ -12,3 +12,12 @@ https://asciinema.org/a/H9GYokb2PNiCQmu3313LLBQsO
 == NixOS
 
 Enable `nix-ld` in order to run lsp server binaries downloaded by Mason.
+
+== Options
+
+Enable autoformatting with
+
+[,lua]
+----
+vim.g.mugvim_autoformat = true
+----
