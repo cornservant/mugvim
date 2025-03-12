@@ -12,8 +12,4 @@ vim.g.mugvim_obsidian_workspaces = {
         name = "personal",
         path = "~/git.loporrit.de/obsidian-vault",
     },
-    {
-        name = "kehrwasser",
-        path = "~/git.loporrit.de/kehrwasser-vault",
-    },
 }
