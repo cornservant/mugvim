@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
-MUGVIM_BASE_DIR=$(realpath $(dirname $0))
+MUGVIM_BASE_DIR=$(realpath "$(dirname $0)/..")
 
 MUGVIM_BASE_DIR=$MUGVIM_BASE_DIR \
     NVIM_APPNAME=mugvim \

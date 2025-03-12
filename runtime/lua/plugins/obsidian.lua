@@ -1,23 +1,16 @@
 return {
     "epwalsh/obsidian.nvim",
     version = "*",
-    lazy = true,
+    -- BUG: cannot set `enabled = vim.g.mugvim_obsidian_workspaces and true or false`...
     ft = "markdown",
     dependencies = {
         "nvim-lua/plenary.nvim",
     },
-    opts = {
-        workspaces = {
-            {
-                name = "personal",
-                path = "~/git.loporrit.de/obsidian-vault",
-            },
-            {
-                name = "kehrwasser",
-                path = "~/git.loporrit.de/kehrwasser-vault",
-            },
-        },
-    },
+    config = function()
+        require("obsidian").setup({
+            workspaces = vim.g.mugvim_obsidian_workspaces or {}
+        })
+    end,
     keys = {
         { "<leader>ob", "<cmd>ObsidianBacklinks<cr>",   "Backlinks" },
         { "<leader>on", "<cmd>ObsidianNew<cr>",         "New" },
