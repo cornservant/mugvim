@@ -1,12 +1,15 @@
-local snippet_path = vim.fn.stdpath("data") .. "/snippets"
+
+local function snippet_path()
+    return vim.g.mugvim_snippets or vim.fn.stdpath("data") .. "/snippets"
+end
 
 local loadSnippets = function()
     require("luasnip.loaders.from_snipmate")
-        .lazy_load({ paths = snippet_path })
+        .lazy_load({ paths = snippet_path() })
 end
 
 local openSnippets = function()
-    vim.cmd.edit(snippet_path)
+    vim.cmd.edit(snippet_path())
 end
 
 return {
