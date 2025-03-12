@@ -5,7 +5,7 @@
 }:
 stdenv.mkDerivation rec {
   pname = "mugvim";
-  version = "0.0.0";
+  version = "2.0.0-alpha1";
 
   sourceRoot = ".";
   src = ../.;
