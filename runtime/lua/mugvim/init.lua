@@ -10,6 +10,9 @@ function M:after_lazy()
     M:load_user_config()
     require('mugvim.autocommands').setup()
     require('mugvim.colors').apply() -- apply colorscheme specified in the user config
+    if vim.g.mugvim_transparent then
+        vim.cmd(":TransparentEnable")
+    end
 end
 
 function M:init(runtime_path)
