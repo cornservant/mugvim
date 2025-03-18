@@ -12,6 +12,7 @@ return {
             })
         end,
     },
+    'EdenEast/nightfox.nvim',
     'GustavoPrietoP/doom-themes.nvim',
     'eddyekofo94/gruvbox-flat.nvim',
     'tpope/vim-surround',
