@@ -109,8 +109,14 @@ local function load_user_config()
     end
 end
 
+local function fix_bufferline_colors()
+    -- NOTE: for some reason `bufferline` doesn't color corectly when calling `vim.cmd.colorscheme` only once, so we call it here pre-emptively, so that subsequent calls work as expected
+    vim.cmd.colorscheme("default")
+end
+
 function M:init(runtime_path)
     M.runtime_path = runtime_path
+    fix_bufferline_colors()
     load_user_config()
     set_base_settings()
     set_base_keymaps()
