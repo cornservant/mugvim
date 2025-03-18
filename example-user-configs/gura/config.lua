@@ -1,5 +1,3 @@
-require("mugvim.colors").setup("tokyonight")
-
 vim.o.cursorline = false
 vim.diagnostic.config({ virtual_lines = false })
 vim.g.indent_blankline_enabled = false
@@ -13,3 +11,7 @@ vim.g.mugvim_obsidian_workspaces = {
         path = "~/git.loporrit.de/obsidian-vault",
     },
 }
+
+require("mugvim.hooks").after_plugin_load(function()
+    vim.cmd.colorscheme("tokyonight")
+end)

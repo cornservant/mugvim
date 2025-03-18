@@ -6,6 +6,7 @@ return {
     {
         'https://git.loporrit.de/long/bufferline-editor.nvim',
         dependencies = { 'akinsho/bufferline.nvim' },
+        ---@type bufferline-editor.config
         opts = {},
         keys = {
             { "<c-e>", function() require("bufferline-editor").editor_toggle() end, desc = "Edit Buffers" },

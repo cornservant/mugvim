@@ -29,12 +29,6 @@ vim.g.mugvim_obsidian_workspaces = { { name = "...", path = "..." }, ... }
 vim.g.mugvim_snippets = vim.fn.std("data") .. "/snippets"
 ```
 
-### Transparency
-
-```lua
-vim.g.mugvim_transparent = true
-```
-
 ### Banner
 
 ```lua
