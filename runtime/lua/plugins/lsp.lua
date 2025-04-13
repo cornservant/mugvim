@@ -1,16 +1,4 @@
-function setup_lsp_if_binary_exists(lsp, opts)
-    local lspconfig = require('lspconfig')
-    local entry = lspconfig[lsp]
-    local command = entry.document_config.default_config.cmd[1]
-    if vim.fn.executable(command) == 1 then
-        -- print("LSP     found: " .. command)
-        entry.setup(opts)
-    else
-        -- print("    not found: " .. command)
-    end
-end
-
-function setup_markdown_oxide(on_attach)
+local function setup_markdown_oxide(on_attach)
     if vim.fn.executable("markdown-oxide") == 1 then
         -- An example nvim-lspconfig capabilities setting
         local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
@@ -38,8 +26,8 @@ local function has_lsp_formatting()
     end
 
     for _, client in ipairs(clients) do
-        if client.supports_method("textDocument/formatting") or
-            client.supports_method("textDocument/rangeFormatting") then
+        if client:supports_method("textDocument/formatting") or
+            client:supports_method("textDocument/rangeFormatting") then
             return true, nil -- LSP supports formatting
         end
     end
@@ -119,22 +107,6 @@ return {
                     }
                 },
             })
-            setup_lsp_if_binary_exists('eslint', { capabilities = capabilities })
-            setup_lsp_if_binary_exists('ts_ls', { capabilities = capabilities })
-            setup_lsp_if_binary_exists('tailwindcss', { capabilities = capabilities })
-            setup_lsp_if_binary_exists('rust_analyzer', { capabilities = capabilities })
-            setup_lsp_if_binary_exists('jdtls', { capabilities = capabilities })
-            setup_lsp_if_binary_exists('nixd', { capabilities = capabilities })
-            -- setup_lsp_if_binary_exists('tinymist', { capabilities = capabilities })
-            -- setup_lsp_if_binary_exists('ruff_lsp', { capabilities = capabilities })
-            -- setup_lsp_if_binary_exists('bashls', { capabilities = capabilities })
-            -- setup_lsp_if_binary_exists('erlangls', { capabilities = capabilities })
-            -- setup_lsp_if_binary_exists('kotlin_language_server', { capabilities = capabilities })
-            -- setup_lsp_if_binary_exists('nginx_language_server', { capabilities = capabilities })
-            setup_lsp_if_binary_exists('ocamllsp', { capabilities = capabilities })
-            setup_lsp_if_binary_exists('zls', { capabilities = capabilities })
-            setup_lsp_if_binary_exists('pyright', { capabilities = capabilities })
-            setup_lsp_if_binary_exists('clangd', { capabilities = capabilities })
             setup_markdown_oxide()
 
             -- Use LspAttach autocommand to only map the following keys

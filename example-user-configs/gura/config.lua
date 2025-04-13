@@ -15,3 +15,23 @@ vim.g.mugvim_obsidian_workspaces = {
 require("mugvim.hooks").after_plugin_load(function()
     vim.cmd.colorscheme("tokyonight")
 end)
+
+vim.lsp.enable({
+    'bashls',
+    'clangd',
+    'erlangls',
+    'eslint',
+    'jdtls',
+    'kotlin_language_server',
+    'luals',
+    'markdown_oxide',
+    'nginx_language_server',
+    'nixd',
+    'ocamllsp',
+    'pyright',
+    'ruff_lsp',
+    'rust_analyzer',
+    'tinymist',
+    'ts_ls',
+    'zls',
+})
