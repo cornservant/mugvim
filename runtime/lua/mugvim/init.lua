@@ -60,6 +60,8 @@ local function set_base_settings()
     vim.opt.showmode = false
     vim.opt.scrolloff = 8
     vim.opt.sidescrolloff = 8
+
+    vim.diagnostic.config({ virtual_text = true })
 end
 
 local function set_base_keymaps()
@@ -114,6 +116,55 @@ local function fix_bufferline_colors()
     vim.cmd.colorscheme("default")
 end
 
+local function setup_lsp()
+    vim.api.nvim_create_autocmd("LspAttach", {
+        desc = "LSP actions",
+        callback = function(ev)
+            require('which-key').add({
+                { "<leader>l",  buffer = ev.buf,                                    group = "LSP" },
+                { "<leader>lR", vim.lsp.buf.references,                             buffer = ev.buf, desc = "References" },
+                { "<leader>la", vim.lsp.buf.code_action,                            buffer = ev.buf, desc = "Code Action" },
+                { "<leader>ld", vim.diagnostic.open_float,                          buffer = ev.buf, desc = "Diagnostic" },
+                { "<leader>lf", function() vim.lsp.buf.format { async = true } end, buffer = ev.buf, desc = "Format" },
+                { "<leader>ll", require("lsp_lines").toggle,                        buffer = ev.buf, desc = "Toggle lsp_lines" },
+                { "<leader>lr", vim.lsp.buf.rename,                                 buffer = ev.buf, desc = "Rename" },
+                { "<leader>lw", vim.lsp.buf.workspace_symbol,                       buffer = ev.buf, desc = "Workspace Symbols" },
+            })
+
+            local opts = { buffer = ev.buf }
+
+            vim.keymap.set("n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", opts)
+            vim.keymap.set("n", "gd", "<cmd>lua vim.lsp.buf.definition()<cr>", opts)
+            vim.keymap.set("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<cr>", opts)
+            vim.keymap.set("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<cr>", opts)
+            vim.keymap.set("n", "go", "<cmd>lua vim.lsp.buf.type_definition()<cr>", opts)
+            vim.keymap.set("n", "gr", "<cmd>lua vim.lsp.buf.references()<cr>", opts)
+            vim.keymap.set("n", "gs", "<cmd>lua vim.lsp.buf.signature_help()<cr>", opts)
+            vim.keymap.set("n", "gc", "<cmd>lua vim.lsp.buf.rename()<cr>", opts)
+            vim.keymap.set({ "n", "x" }, "<F3>", "<cmd>lua vim.lsp.buf.format({async = true})<cr>", opts)
+            vim.keymap.set("n", "<F4>", "<cmd>lua vim.lsp.buf.code_action()<cr>", opts)
+        end,
+    })
+
+    local capabilities = {
+        textDocument = {
+            foldingRange = {
+                dynamicRegistration = false,
+                lineFoldingOnly = true,
+            },
+        },
+    }
+
+    capabilities = require("blink.cmp").get_lsp_capabilities(capabilities)
+
+    vim.lsp.config("*", {
+        capabilities = capabilities,
+        root_markers = { ".git" },
+    })
+
+    vim.lsp.enable({ 'luals' })
+end
+
 function M:init(runtime_path)
     M.runtime_path = runtime_path
     fix_bufferline_colors()
@@ -122,6 +173,7 @@ function M:init(runtime_path)
     set_base_keymaps()
     setup_lazy()
     set_base_autocmds()
+    setup_lsp()
     require('mugvim.hooks').run_after_plugin_load_hooks()
 end
 

@@ -1,40 +1,3 @@
-local function setup_markdown_oxide(on_attach)
-    if vim.fn.executable("markdown-oxide") == 1 then
-        -- An example nvim-lspconfig capabilities setting
-        local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
-
-        -- Ensure that dynamicRegistration is enabled! This allows the LS to take into account actions like the
-        -- Create Unresolved File code action, resolving completions for unindexed code blocks, ...
-        capabilities.workspace = {
-            didChangeWatchedFiles = {
-                dynamicRegistration = true,
-            },
-        }
-
-        require("lspconfig").markdown_oxide.setup({
-            capabilities = capabilities,
-        })
-    end
-end
-
-local function has_lsp_formatting()
-    local bufnr = vim.api.nvim_get_current_buf()
-    local clients = vim.lsp.get_clients({ bufnr = bufnr })
-
-    if #clients == 0 then
-        return false, "No LSP clients attached to this buffer."
-    end
-
-    for _, client in ipairs(clients) do
-        if client:supports_method("textDocument/formatting") or
-            client:supports_method("textDocument/rangeFormatting") then
-            return true, nil -- LSP supports formatting
-        end
-    end
-
-    return false, "No attached LSP client supports formatting for this buffer."
-end
-
 return {
     {
         'folke/neodev.nvim'
@@ -44,10 +7,9 @@ return {
     },
     {
         "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
-        config = function()
-            vim.diagnostic.config({ virtual_text = false })
-            require("lsp_lines").setup()
-        end,
+    },
+    {
+        'neovim/nvim-lspconfig',
     },
     {
         'hrsh7th/nvim-cmp',
@@ -83,80 +45,6 @@ return {
                 }, {
                     { name = 'buffer' },
                 })
-            })
-        end
-    },
-    {
-        'neovim/nvim-lspconfig',
-        dependencies = {
-            'hrsh7th/nvim-cmp',
-            'hrsh7th/cmp-nvim-lsp',
-        },
-        config = function()
-            require('neodev').setup()
-
-            local capabilities = require('cmp_nvim_lsp').default_capabilities()
-
-            setup_lsp_if_binary_exists('lua_ls', {
-                capabilities = capabilities,
-                settings = {
-                    Lua = {
-                        completion = {
-                            callSnippet = "Replace"
-                        }
-                    }
-                },
-            })
-            setup_markdown_oxide()
-
-            -- Use LspAttach autocommand to only map the following keys
-            -- after the language server attaches to the current buffer
-            vim.api.nvim_create_autocmd('LspAttach', {
-                group = vim.api.nvim_create_augroup('UserLspConfig', {}),
-                callback = function(ev)
-                    -- Enable completion triggered by <c-x><c-o>
-                    vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
-
-                    local opts = { buffer = ev.buf, remap = false }
-
-                    -- See `:help vim.lsp.*` for documentation on any of the below functions
-                    vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-                    vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
-                    vim.keymap.set("n", "[d", function() vim.diagnostic.jump({ count = 1, float = true }) end, opts)
-                    vim.keymap.set("n", "]d", function() vim.diagnostic.jump({ count = -1, float = true }) end, opts)
-                    vim.keymap.set("n", "[e", function()
-                        vim.diagnostic.jump({ count = 1, float = true, severity = vim.diagnostic.severity.ERROR })
-                    end, opts)
-                    vim.keymap.set("n", "]e", function()
-                        vim.diagnostic.jump({ count = -1, float = true, severity = vim.diagnostic.severity.ERROR })
-                    end, opts)
-                    vim.keymap.set("i", "<C-h>", vim.lsp.buf.signature_help, opts)
-
-                    require('which-key').add({
-                        { "<leader>l",  buffer = ev.buf,                                    group = "LSP" },
-                        { "<leader>lR", vim.lsp.buf.references,                             buffer = ev.buf, desc = "References" },
-                        { "<leader>la", vim.lsp.buf.code_action,                            buffer = ev.buf, desc = "Code Action" },
-                        { "<leader>ld", vim.diagnostic.open_float,                          buffer = ev.buf, desc = "Diagnostic" },
-                        { "<leader>lf", function() vim.lsp.buf.format { async = true } end, buffer = ev.buf, desc = "Format" },
-                        { "<leader>ll", require("lsp_lines").toggle,                        buffer = ev.buf, desc = "Toggle lsp_lines" },
-                        { "<leader>lr", vim.lsp.buf.rename,                                 buffer = ev.buf, desc = "Rename" },
-                        { "<leader>lw", vim.lsp.buf.workspace_symbol,                       buffer = ev.buf, desc = "Workspace Symbols" },
-                    })
-                end,
-            })
-
-            vim.diagnostic.config({
-                virtual_text = true,
-            })
-
-            vim.api.nvim_create_autocmd({ "BufWritePre" }, {
-                pattern = "*",
-                group = vim.api.nvim_create_augroup("lsp_format_on_save", {}),
-                callback = function()
-                    if has_lsp_formatting() and vim.g.mugvim_autoformat then
-                        vim.lsp.buf.format()
-                    end
-                end,
             })
         end
     },
