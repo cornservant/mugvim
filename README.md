@@ -1,6 +1,8 @@
 Mugway's Vim Config
 ===================
 
+Requires Neovim 0.11 or above.
+
 ## Installation
 
 Use Nix flakes or the `bin/mugvim` script (requires the `MUGVIM_BASE_DIR` environment variable to point to the checked out git repository.
