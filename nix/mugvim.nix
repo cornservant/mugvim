@@ -12,7 +12,7 @@
   mermaid-cli,      # for snacks.image
 }:
 stdenv.mkDerivation rec {
-  pname = "mugvim";
+  pname = "mvim";
   version = "2.0.0-alpha2";
 
   sourceRoot = ".";
@@ -30,11 +30,11 @@ stdenv.mkDerivation rec {
 
   installPhase = ''
     cp -r $src $out
-    chmod +x $out/bin/mugvim
+    chmod +x $out/bin/mvim
   '';
 
   postFixup = ''
-    wrapProgram "$out/bin/mugvim" \
+    wrapProgram "$out/bin/mvim" \
         --set MUGVIM_BASE_DIR "$out" \
         --prefix PATH : "${
             lib.makeBinPath [
