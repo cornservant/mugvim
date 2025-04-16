@@ -6,18 +6,6 @@ local progress = {
     color = {},
 }
 
-local lsp_clients = {
-    "lsp_clients",
-    fmt = function()
-        local clients = {};
-        for _, client in ipairs(vim.lsp.get_clients()) do
-            clients[#clients+1] = client.name
-        end
-        return table.concat(clients, ", ")
-    end,
-    color = {},
-}
-
 local lsp = {
     function(msg)
         msg = msg or "LS Inactive"
@@ -33,9 +21,7 @@ local lsp = {
 
         -- add client
         for _, client in pairs(buf_clients) do
-            if client.name ~= "null-ls" and client.name ~= "copilot" then
-                table.insert(buf_client_names, client.name)
-            end
+            table.insert(buf_client_names, client.name)
         end
 
         local unique_client_names = vim.fn.uniq(buf_client_names)
@@ -79,7 +65,7 @@ return {
                 lualine_a = { 'mode' },
                 lualine_b = { 'branch' },
                 lualine_c = { 'diff' },
-                lualine_x = { 'diagnostics', lsp_clients, 'filetype' },
+                lualine_x = { 'diagnostics', lsp, 'filetype' },
                 lualine_y = { 'location' },
                 lualine_z = { progress }
             },
@@ -87,7 +73,7 @@ return {
                 lualine_a = { 'mode' },
                 lualine_b = { 'branch' },
                 lualine_c = { 'diff' },
-                lualine_x = { 'diagnostics', lsp_clients, 'filetype' },
+                lualine_x = { 'diagnostics', lsp, 'filetype' },
                 lualine_y = { 'location' },
                 lualine_z = { progress }
             },
