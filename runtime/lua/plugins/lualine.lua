@@ -6,6 +6,18 @@ local progress = {
     color = {},
 }
 
+local lsp_clients = {
+    "lsp_clients",
+    fmt = function()
+        local clients = {};
+        for _, client in ipairs(vim.lsp.get_clients()) do
+            clients[#clients+1] = client.name
+        end
+        return table.concat(clients, ", ")
+    end,
+    color = {},
+}
+
 local lsp = {
     function(msg)
         msg = msg or "LS Inactive"
@@ -41,7 +53,6 @@ return {
     'nvim-lualine/lualine.nvim',
     dependencies = {
         'nvim-tree/nvim-web-devicons',
-        'nvim-lua/lsp-status.nvim'
     },
     config = function()
         require('lualine').setup({
@@ -68,7 +79,7 @@ return {
                 lualine_a = { 'mode' },
                 lualine_b = { 'branch' },
                 lualine_c = { 'diff' },
-                lualine_x = { 'diagnostics', "require'lsp-status'.status()", 'filetype' },
+                lualine_x = { 'diagnostics', lsp_clients, 'filetype' },
                 lualine_y = { 'location' },
                 lualine_z = { progress }
             },
@@ -76,7 +87,7 @@ return {
                 lualine_a = { 'mode' },
                 lualine_b = { 'branch' },
                 lualine_c = { 'diff' },
-                lualine_x = { 'diagnostics', "require'lsp-status'.status()", 'filetype' },
+                lualine_x = { 'diagnostics', lsp_clients, 'filetype' },
                 lualine_y = { 'location' },
                 lualine_z = { progress }
             },
