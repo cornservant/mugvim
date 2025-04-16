@@ -23,6 +23,7 @@ return {
         -- your own keymap.
         -- NOTE: I am using a modified 'enter' preset
         keymap = {
+            preset = 'none',
             ['<C-space>'] = { 'show', 'show_documentation', 'hide_documentation' },
             ['<C-e>'] = { 'hide', 'fallback' },
             ['<CR>'] = { 'accept', 'fallback' },
