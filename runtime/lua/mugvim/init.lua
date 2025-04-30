@@ -1,5 +1,23 @@
 local M = {}
 
+local function has_lsp_formatting()
+    local bufnr = vim.api.nvim_get_current_buf()
+    local clients = vim.lsp.get_clients({ bufnr = bufnr })
+
+    if #clients == 0 then
+        return false, "No LSP clients attached to this buffer."
+    end
+
+    for _, client in ipairs(clients) do
+        if client.supports_method("textDocument/formatting") or
+            client.supports_method("textDocument/rangeFormatting") then
+            return true, nil -- LSP supports formatting
+        end
+    end
+
+    return false, "No attached LSP client supports formatting for this buffer."
+end
+
 local function setup_lazy()
     local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
     vim.opt.rtp:prepend(lazypath)
@@ -98,6 +116,16 @@ local function set_base_autocmds()
         nnoremap <buffer><silent> q :close<CR>
         set nobuflisted
         ]],
+    })
+
+    vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+        pattern = "*",
+        group = vim.api.nvim_create_augroup("lsp_format_on_save", {}),
+        callback = function()
+            if has_lsp_formatting() and vim.g.mugvim_autoformat then
+                vim.lsp.buf.format()
+            end
+        end,
     })
 end
 
