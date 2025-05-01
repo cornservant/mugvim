@@ -62,6 +62,12 @@ return {
                         action = function() vim.cmd("checkhealth") end,
                         key = 'h',
                     },
+                    {
+                        icon = '  ',
+                        desc = 'Edit Config            ',
+                        action = function() vim.cmd.edit(require("mugvim.init"):user_config_path()) end,
+                        key = 'c',
+                    },
                 },
             },
             sections = {

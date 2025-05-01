@@ -129,8 +129,12 @@ local function set_base_autocmds()
     })
 end
 
+function M:user_config_path()
+    return vim.fn.stdpath("config") .. "/config.lua"
+end
+
 local function load_user_config()
-    local user_config_path = vim.fn.stdpath("config") .. "/config.lua";
+    local user_config_path = M:user_config_path()
     if vim.fn.filereadable(user_config_path) == 1 then
         local ok, _ = pcall(dofile, user_config_path)
         if not ok then
