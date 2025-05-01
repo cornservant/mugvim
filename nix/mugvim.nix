@@ -13,7 +13,7 @@
 }:
 stdenv.mkDerivation rec {
   pname = "mvim";
-  version = "2.0.0-alpha2";
+  version = "2.0.0";
 
   sourceRoot = ".";
   src = ../.;
