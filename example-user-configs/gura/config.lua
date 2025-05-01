@@ -23,7 +23,7 @@ vim.lsp.enable({
     'eslint',
     'jdtls',
     'kotlin_language_server',
-    'luals',
+    'lua_ls',
     'markdown_oxide',
     'nginx_language_server',
     'nixd',

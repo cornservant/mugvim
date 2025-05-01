@@ -190,7 +190,7 @@ local function setup_lsp()
         root_markers = { ".git" },
     })
 
-    vim.lsp.enable({ 'luals' })
+    vim.lsp.enable({ 'lua_ls' })
 end
 
 function M:init(runtime_path)
