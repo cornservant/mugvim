@@ -39,24 +39,6 @@ return {
                         key = 'r',
                     },
                     {
-                        icon = '󰈞  ',
-                        desc = 'Find Files             ',
-                        action = require 'telescope.builtin'.find_files,
-                        key = 'f',
-                    },
-                    {
-                        icon = '󰈲  ',
-                        desc = 'Grep Files             ',
-                        action = require 'telescope.builtin'.live_grep,
-                        key = '/',
-                    },
-                    {
-                        icon = '󰊢  ',
-                        desc = 'Git Status             ',
-                        action = require 'telescope.builtin'.git_status,
-                        key = 's',
-                    },
-                    {
                         icon = '󰗶  ',
                         desc = 'Check Health           ',
                         action = function() vim.cmd("checkhealth") end,
