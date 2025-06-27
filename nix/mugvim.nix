@@ -16,7 +16,10 @@ stdenv.mkDerivation rec {
   version = "2.1.0";
 
   sourceRoot = ".";
-  src = ../.;
+  src = builtins.path {
+    path = ../.;
+    name = "source";
+  };
 
   application = pkgs.writeTextFile {
     executable = true;
