@@ -197,6 +197,12 @@ local function setup_lsp()
     vim.lsp.enable({ 'lua_ls' })
 end
 
+function M:version()
+    local version_file = M.runtime_path .. "/../VERSION"
+    local version = vim.fn.readfile(version_file)[1]
+    return version
+end
+
 function M:init(runtime_path)
     M.runtime_path = runtime_path
     fix_bufferline_colors()

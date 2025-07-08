@@ -1,3 +1,4 @@
+local mugvim = require("mugvim")
 local default_header = [[
 
 
@@ -6,6 +7,7 @@ local default_header = [[
   > ^ <
 
 マッグヴィム
+(v]] .. mugvim:version() .. [[)
 
 in Gedenken an
 Bram Moolenaar]]
