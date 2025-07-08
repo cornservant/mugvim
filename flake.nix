@@ -23,6 +23,7 @@
           mermaid-cli,
         }:
         let
+          version = pkgs.lib.trimWith { end = true; } (builtins.readFile ./VERSION);
           tree-sitter-deps = [
             tree-sitter
             zig
@@ -37,11 +38,11 @@
         in
         stdenv.mkDerivation rec {
           pname = "mvim";
-          version = builtins.readFile ../VERSION;
+          inherit version;
 
           sourceRoot = ".";
           src = builtins.path {
-            path = ../.;
+            path = ./.;
             name = "source";
           };
 
