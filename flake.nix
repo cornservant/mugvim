@@ -21,9 +21,15 @@
           tectonic,
           ghostscript,
           mermaid-cli,
+          gnumake,
+          rustup,
         }:
         let
           version = pkgs.lib.trimWith { end = true; } (builtins.readFile ./VERSION);
+          fff-deps = [
+            gnumake
+            rustup
+          ];
           tree-sitter-deps = [
             tree-sitter
             zig
@@ -64,7 +70,7 @@
           postFixup = ''
             wrapProgram "$out/bin/mvim" \
                 --set MUGVIM_BASE_DIR "$out" \
-                --prefix PATH : "${lib.makeBinPath (tree-sitter-deps ++ snacks-image-deps)}"
+                --prefix PATH : "${lib.makeBinPath (tree-sitter-deps ++ snacks-image-deps ++ fff-deps)}"
           '';
         };
     in
