@@ -75,7 +75,6 @@ return {
         { "<leader>,",       function() require 'snacks.picker'.buffers() end,                                 desc = "Buffers" },
         { "<leader>/",       function() require 'snacks.picker'.grep() end,                                    desc = "Grep" },
         { "<leader>:",       function() require 'snacks.picker'.command_history() end,                         desc = "Command History" },
-        { "<leader>n",       function() require 'snacks.picker'.notifications() end,                           desc = "Notification History" },
         { "<leader>E",       function() require 'snacks'.explorer() end,                                       desc = "File Explorer" },
         -- find
         { "<leader>fb",      function() require 'snacks.picker'.buffers() end,                                 desc = "Buffers" },
@@ -114,6 +113,7 @@ return {
         { "<leader>sl",      function() require 'snacks.picker'.loclist() end,                                 desc = "Location List" },
         { "<leader>sm",      function() require 'snacks.picker'.marks() end,                                   desc = "Marks" },
         { "<leader>sM",      function() require 'snacks.picker'.man() end,                                     desc = "Man Pages" },
+        { "<leader>sn",      function() require 'snacks.picker'.notifications() end,                           desc = "Notification History" },
         { "<leader>sp",      function() require 'snacks.picker'.lazy() end,                                    desc = "Search for Plugin Spec" },
         { "<leader>sq",      function() require 'snacks.picker'.qflist() end,                                  desc = "Quickfix List" },
         { "<leader>sR",      function() require 'snacks.picker'.resume() end,                                  desc = "Resume" },
