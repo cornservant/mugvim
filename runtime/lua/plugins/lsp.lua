@@ -8,4 +8,7 @@ return {
     {
         'neovim/nvim-lspconfig',
     },
+    {
+        'nvim-treesitter/nvim-treesitter-context',
+    },
 }
