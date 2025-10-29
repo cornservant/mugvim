@@ -78,6 +78,7 @@ local function set_base_settings()
     vim.opt.showmode = false
     vim.opt.scrolloff = 8
     vim.opt.sidescrolloff = 8
+    vim.opt.diffopt:append("vertical")
 
     vim.diagnostic.config({ virtual_text = true })
 end
