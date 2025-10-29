@@ -155,9 +155,9 @@ local function setup_lsp()
                 { "<leader>la", vim.lsp.buf.code_action,                            buffer = ev.buf, desc = "Code Action" },
                 { "<leader>ld", vim.diagnostic.open_float,                          buffer = ev.buf, desc = "Diagnostic" },
                 { "<leader>lf", function() vim.lsp.buf.format { async = true } end, buffer = ev.buf, desc = "Format" },
-                { "<leader>ll", require("lsp_lines").toggle,                        buffer = ev.buf, desc = "Toggle lsp_lines" },
                 { "<leader>lr", vim.lsp.buf.rename,                                 buffer = ev.buf, desc = "Rename" },
                 { "<leader>lw", vim.lsp.buf.workspace_symbol,                       buffer = ev.buf, desc = "Workspace Symbols" },
+                { "<leader>tl", require("lsp_lines").toggle,                        buffer = ev.buf, desc = "Toggle lsp_lines" },
             })
 
             local opts = { buffer = ev.buf }
