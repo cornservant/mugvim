@@ -18,21 +18,12 @@
           zig,
           imagemagick,
           typst,
-          tectonic,
-          ghostscript,
-          mermaid-cli,
-          gnumake,
-          rustup,
           neovim,
         }:
         let
           version = pkgs.lib.trimWith { end = true; } (builtins.readFile ./VERSION);
           base-deps = [
             neovim
-          ];
-          fff-deps = [
-            gnumake
-            rustup
           ];
           tree-sitter-deps = [
             tree-sitter
@@ -41,9 +32,6 @@
           snacks-image-deps = [
             imagemagick
             typst
-            tectonic
-            ghostscript
-            mermaid-cli
           ];
         in
         stdenv.mkDerivation rec {
@@ -74,9 +62,7 @@
           postFixup = ''
             wrapProgram "$out/bin/mvim" \
                 --set MUGVIM_BASE_DIR "$out" \
-                --prefix PATH : "${
-                  lib.makeBinPath (base-deps ++ tree-sitter-deps ++ snacks-image-deps ++ fff-deps)
-                }"
+                --prefix PATH : "${lib.makeBinPath (base-deps ++ tree-sitter-deps ++ snacks-image-deps)}"
           '';
         };
     in
