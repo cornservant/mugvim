@@ -22,5 +22,4 @@ return {
     'editorconfig/editorconfig-vim',
     'LunarVim/bigfile.nvim',
     'xiyaowong/transparent.nvim',
-    'dhruvasagar/vim-table-mode',
 }
