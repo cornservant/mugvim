@@ -120,5 +120,7 @@ return {
         { "<leader>su",      function() require 'snacks.picker'.undo() end,                                    desc = "Undo History" },
         -- extra
         { "<leader>+c",      function() require 'snacks.picker'.colorschemes() end,                            desc = "Colorschemes" },
+        -- image fix
+        { "<leader>ti",      function() require 'mugvim.snacks_image_fix'.toggle_snacks_image() end,           desc = "Toggle image preview" },
     },
 }

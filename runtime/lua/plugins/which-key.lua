@@ -10,6 +10,7 @@ return {
             { "<leader>g",  group = "Git" },
             { "<leader>q",  vim.cmd.quit,                          desc = "Quit" },
             { "<leader>s",  group = "Search" },
+            { "<leader>t",  group = "Toggle" },
             { "<leader>th", group = "History" },
             { "<leader>w",  vim.cmd.write,                         desc = "Write" },
         })
