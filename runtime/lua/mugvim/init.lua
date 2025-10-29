@@ -94,10 +94,6 @@ local function set_base_keymaps()
 
     vim.keymap.set('n', '<S-h>', '<cmd>BufferLineCyclePrev<cr>')
     vim.keymap.set('n', '<S-l>', '<cmd>BufferLineCycleNext<cr>')
-    vim.keymap.set('n', '<C-h>', '<cmd>wincmd h<cr>')
-    vim.keymap.set('n', '<C-j>', '<cmd>wincmd j<cr>')
-    vim.keymap.set('n', '<C-k>', '<cmd>wincmd k<cr>')
-    vim.keymap.set('n', '<C-l>', '<cmd>wincmd l<cr>')
     vim.keymap.set('t', '<esc><esc>', '<c-\\><c-n>')
     vim.keymap.set('i', '<M-backspace>', '<c-w>')
 end
