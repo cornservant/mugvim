@@ -49,7 +49,7 @@ return {
                     {
                         icon = '  ',
                         desc = 'Edit Config            ',
-                        action = function() vim.cmd.edit(require("mugvim.init"):user_config_path()) end,
+                        action = mugvim.edit_user_config,
                         key = 'c',
                     },
                 },

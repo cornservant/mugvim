@@ -129,6 +129,10 @@ function M:user_config_path()
     return vim.fn.stdpath("config") .. "/config.lua"
 end
 
+function M:edit_user_config()
+    vim.cmd.edit(M:user_config_path())
+end
+
 local function load_user_config()
     local user_config_path = M:user_config_path()
     if vim.fn.filereadable(user_config_path) == 1 then
@@ -193,6 +197,14 @@ local function setup_lsp()
     vim.lsp.enable({ 'lua_ls' })
 end
 
+local function setup_commands()
+    vim.api.nvim_create_user_command("MugvimEditUserConfig", M.edit_user_config, {})
+    vim.api.nvim_create_user_command("MugvimVersion", function() print(M:version()) end, {})
+    vim.api.nvim_create_user_command("MugvimToggleFormatOnWrite", function()
+        vim.g.mugvim_autoformat = not vim.g.mugvim_autoformat
+    end, {})
+end
+
 function M:version()
     local version_file = M.runtime_path .. "/../VERSION"
     local version = vim.fn.readfile(version_file)[1]
@@ -208,6 +220,7 @@ function M:init(runtime_path)
     setup_lazy()
     set_base_autocmds()
     setup_lsp()
+    setup_commands()
     require('mugvim.hooks').run_after_plugin_load_hooks()
 end
 
