@@ -19,13 +19,10 @@ end)
 vim.lsp.enable({
     'bashls',
     'clangd',
-    'erlangls',
     'eslint',
     'jdtls',
-    'kotlin_language_server',
     'lua_ls',
     'markdown_oxide',
-    'nginx_language_server',
     'nixd',
     'ocamllsp',
     'pyright',
@@ -34,4 +31,6 @@ vim.lsp.enable({
     'tinymist',
     'ts_ls',
     'zls',
+    'html',
+    'cssls',
 })
