@@ -1,6 +1,7 @@
 return {
     {
-        'folke/neodev.nvim'
+        'folke/neodev.nvim',
+        cond = false, -- I don't use this 99.99% of the time
     },
     {
         "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
