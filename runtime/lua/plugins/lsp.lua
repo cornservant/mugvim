@@ -19,5 +19,13 @@ return {
     },
     {
         'nvim-treesitter/nvim-treesitter-context',
+        config = function()
+            require 'treesitter-context'.setup {
+                enable = false,
+            }
+        end,
+        keys = {
+            { "<leader>tc", function() require 'treesitter-context'.toggle() end, desc = "Toggle treesitter context" },
+        }
     },
 }
