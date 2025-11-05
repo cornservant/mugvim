@@ -42,7 +42,10 @@ local function setup_lazy()
         },
     }
 
-    require('lazy').setup('plugins', opts)
+    require('lazy').setup({
+        { import = 'plugins' },
+        require('mugvim.hooks').get_extra_plugins(),
+    }, opts)
     vim.opt.rtp:prepend(M.runtime_path) -- `lazy` fucks up the runtime path, so we fix it here
 end
 
