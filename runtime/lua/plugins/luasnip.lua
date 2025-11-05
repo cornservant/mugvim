@@ -1,4 +1,3 @@
-
 local function snippet_path()
     return vim.g.mugvim_snippets or vim.fn.stdpath("data") .. "/snippets"
 end
@@ -15,7 +14,7 @@ end
 return {
     "L3MON4D3/LuaSnip",
     lazy = false,
-    version = "v2.*",
+    version = "v2.4.*",
     -- build = "make install_jsregexp",
     config = function()
         local ls = require("luasnip")
