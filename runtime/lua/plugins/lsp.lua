@@ -1,6 +1,6 @@
 return {
     {
-        'folke/neodev.nvim',
+        'folke/lazydev.nvim',
         cond = false, -- I don't use this 99.99% of the time
     },
     {
