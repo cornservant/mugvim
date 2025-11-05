@@ -156,14 +156,15 @@ local function setup_lsp()
         desc = "LSP actions",
         callback = function(ev)
             require('which-key').add({
-                { "<leader>l",  buffer = ev.buf,                                    group = "LSP" },
-                { "<leader>lR", vim.lsp.buf.references,                             buffer = ev.buf, desc = "References" },
-                { "<leader>la", vim.lsp.buf.code_action,                            buffer = ev.buf, desc = "Code Action" },
-                { "<leader>ld", vim.diagnostic.open_float,                          buffer = ev.buf, desc = "Diagnostic" },
-                { "<leader>lf", function() vim.lsp.buf.format { async = true } end, buffer = ev.buf, desc = "Format" },
-                { "<leader>lr", vim.lsp.buf.rename,                                 buffer = ev.buf, desc = "Rename" },
-                { "<leader>lw", vim.lsp.buf.workspace_symbol,                       buffer = ev.buf, desc = "Workspace Symbols" },
-                { "<leader>tl", require("lsp_lines").toggle,                        buffer = ev.buf, desc = "Toggle lsp_lines" },
+                { "<leader>l",  buffer = ev.buf,                                       group = "LSP" },
+                { "<leader>lR", vim.lsp.buf.references,                                buffer = ev.buf, desc = "References" },
+                { "<leader>la", vim.lsp.buf.code_action,                               buffer = ev.buf, desc = "Code Action" },
+                { "<leader>ld", vim.diagnostic.open_float,                             buffer = ev.buf, desc = "Diagnostic" },
+                { "<leader>lf", function() vim.lsp.buf.format { async = true } end,    buffer = ev.buf, desc = "Format" },
+                { "<leader>lr", vim.lsp.buf.rename,                                    buffer = ev.buf, desc = "Rename" },
+                { "<leader>lw", vim.lsp.buf.workspace_symbol,                          buffer = ev.buf, desc = "Workspace Symbols" },
+                { "<leader>tl", require("lsp_lines").toggle,                           buffer = ev.buf, desc = "Toggle lsp_lines" },
+                { "<leader>lt", function() require("trouble").open("diagnostics") end, buffer = ev.buf, desc = "Trouble: Error" },
             })
 
             local opts = { buffer = ev.buf }
