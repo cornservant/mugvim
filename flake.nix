@@ -61,6 +61,7 @@
             install -m 444 -D $src/VERSION  $out/VERSION
             install -m 555 -D $src/bin/mvim $out/bin/mvim
             install -m 444 -D $src/resources/mugvim.desktop $out/share/applications/mugvim.desktop
+            install -m 444 -D $src/resources/mugvim.svg $out/share/icons/hicolor/scalable/apps/mugvim.svg
             cp -r $src/runtime $out/runtime
           '';
 
