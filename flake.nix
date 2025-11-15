@@ -55,8 +55,13 @@
           ];
 
           installPhase = ''
-            cp -r $src $out
-            chmod +x $out/bin/mvim
+            echo src = $src
+            echo out = $out
+            install -m 444 -D $src/init.lua $out/init.lua
+            install -m 444 -D $src/VERSION  $out/VERSION
+            install -m 555 -D $src/bin/mvim $out/bin/mvim
+            install -m 444 -D $src/resources/mugvim.desktop $out/share/applications/mugvim.desktop
+            cp -r $src/runtime $out/runtime
           '';
 
           postFixup = ''
