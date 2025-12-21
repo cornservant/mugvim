@@ -4,7 +4,8 @@ return {
         opts = {},
     },
     {
-        'https://git.loporrit.de/long/bufferline-editor.nvim',
+        -- 'https://git.loporrit.de/long/bufferline-editor.nvim',
+        dir = '/home/long/git.loporrit.de/bufferline-editor.nvim',
         dependencies = {
             'akinsho/bufferline.nvim',
             'nvim-tree/nvim-web-devicons',
