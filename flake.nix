@@ -77,5 +77,13 @@
         default = mugvim;
         mugvim = pkgsFor.${system}.callPackage package { };
       });
+      devShells = eachSystem (system: rec {
+        default = pkgsFor.${system}.mkShell {
+          packages = [
+            (pkgsFor.${system}.callPackage package { })
+            pkgsFor.${system}.neovim
+          ];
+        };
+      });
     };
 }
