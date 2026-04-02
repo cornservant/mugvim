@@ -1,89 +1,33 @@
 {
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    systems.url = "github:nix-systems/default-linux";
+    flake-parts.url = "github:hercules-ci/flake-parts";
   };
   outputs =
     inputs:
-    let
-      eachSystem = inputs.nixpkgs.lib.genAttrs (import inputs.systems);
-      pkgsFor = eachSystem (system: inputs.nixpkgs.legacyPackages.${system});
-      package =
-        {
-          stdenv,
-          lib,
-          pkgs,
-          makeWrapper,
-          tree-sitter,
-          zig,
-          imagemagick,
-          typst,
-          neovim,
-        }:
+    inputs.flake-parts.lib.mkFlake { inherit inputs; } {
+      systems = [ "x86_64-linux" ];
+      perSystem =
+        { pkgs, ... }:
         let
-          version = pkgs.lib.trimWith { end = true; } (builtins.readFile ./VERSION);
-          base-deps = [
-            neovim
-          ];
-          tree-sitter-deps = [
-            tree-sitter
-            zig
-          ];
-          snacks-image-deps = [
-            imagemagick
-            typst
-          ];
+          mugvim = pkgs.callPackage ./package.nix { };
         in
-        stdenv.mkDerivation rec {
-          pname = "mvim";
-          inherit version;
+        {
+          formatter = pkgs.nixfmt-rfc-style;
 
-          sourceRoot = ".";
-          src = builtins.path {
-            path = ./.;
-            name = "source";
+          packages = {
+            inherit mugvim;
+            default = mugvim;
           };
 
-          application = pkgs.writeTextFile {
-            executable = true;
-            name = pname;
-            text = ''NVIM_APPNAME=${pname} ${neovim}/bin/nvim -u $out/init.lua "$@"'';
+          devShells.default = pkgs.mkShell {
+            packages = with pkgs; [
+              mugvim
+              neovim
+              tree-sitter
+              zig
+            ];
           };
-
-          nativeBuildInputs = [
-            makeWrapper
-          ];
-
-          installPhase = ''
-            echo src = $src
-            echo out = $out
-            install -m 444 -D $src/init.lua $out/init.lua
-            install -m 444 -D $src/VERSION  $out/VERSION
-            install -m 555 -D $src/bin/mvim $out/bin/mvim
-            install -m 444 -D $src/resources/mugvim.desktop $out/share/applications/mugvim.desktop
-            install -m 444 -D $src/resources/mugvim.svg $out/share/icons/hicolor/scalable/apps/mugvim.svg
-            cp -r $src/runtime $out/runtime
-          '';
-
-          postFixup = ''
-            wrapProgram "$out/bin/mvim" \
-                --set MUGVIM_BASE_DIR "$out" \
-                --prefix PATH : "${lib.makeBinPath (base-deps ++ tree-sitter-deps ++ snacks-image-deps)}"
-          '';
         };
-    in
-    {
-      packages = eachSystem (system: rec {
-        default = mugvim;
-        mugvim = pkgsFor.${system}.callPackage package { };
-      });
-      devShells = eachSystem (system: rec {
-        default = pkgsFor.${system}.mkShell {
-          packages = [
-            (pkgsFor.${system}.callPackage package { })
-            pkgsFor.${system}.neovim
-          ];
-        };
-      });
     };
 }

@@ -1,0 +1,62 @@
+{
+  stdenv,
+  lib,
+  pkgs,
+  makeWrapper,
+  tree-sitter,
+  zig,
+  imagemagick,
+  typst,
+  neovim,
+}:
+let
+  version = pkgs.lib.trimWith { end = true; } (builtins.readFile ./VERSION);
+  base-deps = [
+    neovim
+  ];
+  tree-sitter-deps = [
+    tree-sitter
+    zig
+  ];
+  snacks-image-deps = [
+    imagemagick
+    typst
+  ];
+in
+stdenv.mkDerivation rec {
+  pname = "mvim";
+  inherit version;
+
+  sourceRoot = ".";
+  src = builtins.path {
+    path = ./.;
+    name = "source";
+  };
+
+  application = pkgs.writeTextFile {
+    executable = true;
+    name = pname;
+    text = ''NVIM_APPNAME=${pname} ${neovim}/bin/nvim -u $out/init.lua "$@"'';
+  };
+
+  nativeBuildInputs = [
+    makeWrapper
+  ];
+
+  installPhase = ''
+    echo src = $src
+    echo out = $out
+    install -m 444 -D $src/init.lua $out/init.lua
+    install -m 444 -D $src/VERSION  $out/VERSION
+    install -m 555 -D $src/bin/mvim $out/bin/mvim
+    install -m 444 -D $src/resources/mugvim.desktop $out/share/applications/mugvim.desktop
+    install -m 444 -D $src/resources/mugvim.svg $out/share/icons/hicolor/scalable/apps/mugvim.svg
+    cp -r $src/runtime $out/runtime
+  '';
+
+  postFixup = ''
+    wrapProgram "$out/bin/mvim" \
+        --set MUGVIM_BASE_DIR "$out" \
+        --prefix PATH : "${lib.makeBinPath (base-deps ++ tree-sitter-deps ++ snacks-image-deps)}"
+  '';
+}
