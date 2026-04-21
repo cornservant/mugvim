@@ -1,7 +1,6 @@
 {
   stdenv,
   lib,
-  makeWrapper,
   tree-sitter,
   zig,
   imagemagick,
@@ -69,10 +68,6 @@ stdenv.mkDerivation rec {
       ${lib.getExe neovim} -u "$MUGVIM_BASE_DIR/init.lua" "$@"
     '';
   };
-
-  nativeBuildInputs = [
-    makeWrapper
-  ];
 
   installPhase =
     let
