@@ -1,0 +1,44 @@
+{
+  "plugins": {
+    "NeoSolarized.nvim": {
+      "rev": "3c55ad358c062aa4879950c4f83b4deeac6b72df",
+      "src": "https://github.com/Tsuzat/NeoSolarized.nvim"
+    },
+    "catppuccin": {
+      "rev": "426dbebe06b5c69fd846ceb17b42e12f890aedf1",
+      "src": "https://github.com/catppuccin/nvim"
+    },
+    "doom-themes.nvim": {
+      "rev": "03d417d3eab71c320744f8da22251715ba6cee53",
+      "src": "https://github.com/GustavoPrietoP/doom-themes.nvim"
+    },
+    "everforest": {
+      "rev": "aeef62ee97872d2557d25904d160ec93a4a355f8",
+      "src": "https://github.com/sainnhe/everforest"
+    },
+    "lean.nvim": {
+      "rev": "f1308f2af1fdc40b5c0d2170eaecd01373c985b6",
+      "src": "https://github.com/Julian/lean.nvim"
+    },
+    "mini.jump": {
+      "rev": "9e94f41a3ebcd5f5771d36fdedb18fde9d28da76",
+      "src": "https://github.com/nvim-mini/mini.jump"
+    },
+    "nightfox.nvim": {
+      "rev": "ba47d4b4c5ec308718641ba7402c143836f35aa9",
+      "src": "https://github.com/EdenEast/nightfox.nvim"
+    },
+    "onedark.nvim": {
+      "rev": "df4792accde9db0043121f32628bcf8e645d9aea",
+      "src": "https://github.com/navarasu/onedark.nvim"
+    },
+    "which-key.nvim": {
+      "rev": "3aab2147e74890957785941f0c1ad87d0a44c15a",
+      "src": "https://github.com/folke/which-key.nvim"
+    },
+    "zen-mode.nvim": {
+      "rev": "8564ce6d29ec7554eb9df578efa882d33b3c23a7",
+      "src": "https://github.com/folke/zen-mode.nvim"
+    }
+  }
+}

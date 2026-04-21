@@ -1,6 +1,10 @@
 {
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    blink = {
+      url = "github:saghen/blink.cmp/v1.10.2";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     flake-parts.url = "github:hercules-ci/flake-parts";
   };
   outputs =
@@ -10,22 +14,24 @@
       perSystem =
         { pkgs, ... }:
         let
-          mugvim = pkgs.callPackage ./package.nix { };
+          blink-fuzzy-lib = inputs.blink.packages.${pkgs.stdenv.hostPlatform.system}.blink-fuzzy-lib;
         in
-        {
+        rec {
           formatter = pkgs.nixfmt-rfc-style;
 
-          packages = {
-            inherit mugvim;
+          packages = rec {
             default = mugvim;
+            mugvim = pkgs.callPackage ./package.nix { inherit blink-fuzzy-lib; };
           };
 
           devShells.default = pkgs.mkShell {
             packages = with pkgs; [
-              mugvim
+              blink-fuzzy-lib
+              packages.mugvim
               neovim
               tree-sitter
               zig
+              nurl
             ];
           };
         };
