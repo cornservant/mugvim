@@ -710,12 +710,10 @@ function M:plugin_multicursor()
 end
 
 function M:plugin_obsidian()
-    if vim.g.mugvim_obsidian_workspaces then
-        require("mugvim.util"):load_on_ft("plugin:obsidian", { "markdown" }, function()
-            require("obsidian").setup({
-                workspaces = vim.g.mugvim_obsidian_workspaces or {}
-            })
-        end)
+    if vim.g.mugvim_obsidian_workspaces and true or false then
+        require("obsidian").setup({
+            workspaces = vim.g.mugvim_obsidian_workspaces or {}
+        })
         require("which-key").add({
             { "<leader>Ob", "<cmd>ObsidianBacklinks<cr>",   desc = "Backlinks" },
             { "<leader>On", "<cmd>ObsidianNew<cr>",         desc = "New" },

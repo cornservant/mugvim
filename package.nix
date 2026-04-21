@@ -6,6 +6,7 @@
   imagemagick,
   typst,
   neovim,
+  ripgrep,
   blink-fuzzy-lib,
   fetchFromGitHub,
   fetchgit,
@@ -15,6 +16,9 @@ let
   version = lib.trimWith { end = true; } (builtins.readFile ./VERSION);
   base-deps = [
     neovim
+  ];
+  obsidian-deps = [
+    ripgrep
   ];
   tree-sitter-deps = [
     tree-sitter
@@ -64,7 +68,9 @@ stdenv.mkDerivation rec {
       #!/usr/bin/env sh
       export NVIM_APPNAME=${NVIM_APPNAME}
       export MUGVIM_BASE_DIR=$(realpath "$(dirname "$(realpath "$0")")/..")
-      export PATH="${lib.makeBinPath (base-deps ++ tree-sitter-deps ++ snacks-image-deps)}:$PATH"
+      export PATH="${
+        lib.makeBinPath (base-deps ++ tree-sitter-deps ++ obsidian-deps ++ snacks-image-deps)
+      }:$PATH"
       ${lib.getExe neovim} -u "$MUGVIM_BASE_DIR/init.lua" "$@"
     '';
   };
