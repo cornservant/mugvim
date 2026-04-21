@@ -172,6 +172,7 @@ function M:base_commands()
 end
 
 function M:plugin_which_key()
+    require("which-key").setup({})
     require('which-key').add({
         { "<leader>+",  group = "Mugvim" },
         { "<leader>b",  group = "Buffer" },
