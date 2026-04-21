@@ -141,8 +141,15 @@
     type = "github";
     owner = "nvim-treesitter";
     repo = "nvim-treesitter";
-    rev = "main";
+    rev = "4916d6592ede8c07973490d9322f187e07dfefac";
     hash = "sha256-PQR6tFt4lCrAZNQG7BLMD1IiCKja9wDS1S4laGJf/HE=";
+  };
+  nvim-treesitter-context = {
+    type = "github";
+    owner = "nvim-treesitter";
+    repo = "nvim-treesitter-context";
+    rev = "b0c45cefe2c8f7b55fc46f34e563bc428ef99636";
+    hash = "sha256-K4o+iJY8+D0PRvRvXuBqX2q3fwxizAPp/FFpm0O0I9E=";
   };
   nvim-webdev-icons = {
     type = "github";
@@ -262,13 +269,6 @@
     repo = "tokyonight.nvim";
     rev = "cdc07ac78467a233fd62c493de29a17e0cf2b2b6";
     hash = "sha256-a9iRWue7DB7s/wNdxqqB51Jya5P9X6sDftqhdmKggU0=";
-  };
-  treesitter-context = {
-    type = "github";
-    owner = "nvim-treesitter";
-    repo = "nvim-treesitter-context";
-    rev = "b0c45cefe2c8f7b55fc46f34e563bc428ef99636";
-    hash = "sha256-K4o+iJY8+D0PRvRvXuBqX2q3fwxizAPp/FFpm0O0I9E=";
   };
   undotree = {
     type = "github";
