@@ -227,13 +227,13 @@
     rev = "2a8a3187ba6b15201b2563a3f0331fcdf49da36c";
     hash = "sha256-faJqZI4oWqNTwbN6nX4nUR0hKiSx0nOcG8eDlzPH17E=";
   };
-  outline = {
-    type = "github";
-    owner = "hedyhli";
-    repo = "outline.nvim";
-    rev = "c293eb56db880a0539bf9d85b4a27816960b863e";
-    hash = "sha256-xKu05IgOpgtt2W+WqXuTUjX66ffDrU8BDi8z7M6M1q4=";
-  };
+  # outline = {
+  #   type = "github";
+  #   owner = "hedyhli";
+  #   repo = "outline.nvim";
+  #   rev = "c293eb56db880a0539bf9d85b4a27816960b863e";
+  #   hash = "sha256-xKu05IgOpgtt2W+WqXuTUjX66ffDrU8BDi8z7M6M1q4=";
+  # };
   snacks = {
     type = "github";
     owner = "folke";
