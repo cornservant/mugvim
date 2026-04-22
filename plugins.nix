@@ -242,13 +242,6 @@
     rev = "31e3c38ce9b29781e4422fc0322eb0a21f4e8668";
     hash = "sha256-VGeIRfwQsHgSO89Pmn6yIP9na1F6mmYZx0HDLe9IKCQ=";
   };
-  transparent = {
-    type = "github";
-    owner = "xiyaowong";
-    repo = "transparent.nvim";
-    rev = "8ac59883de84e9cd1850ea25cf087031c5ba7d54";
-    hash = "sha256-GlN7/+TmXld2UVPN2rDP7nKqbnswiezmGXn+uGK5I5c=";
-  };
   trouble = {
     type = "github";
     owner = "folke";
