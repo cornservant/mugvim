@@ -52,13 +52,6 @@
     rev = "e30b7f2008e52442154b66f7c519bfd2f1e32acb";
     hash = "sha256-h0kPue5Eqd5aeu4VoLH45pF0DmWWo1d8SnLICSQ63zc=";
   };
-  crates = {
-    type = "github";
-    owner = "saecki";
-    repo = "crates.nvim";
-    rev = "694357861ec9ebf12475ddcdd04ea45a0923c32d";
-    hash = "sha256-+6rC+bticNgMhZ+2lkPpitunSv4nHmBzCIj6ngt7gaA=";
-  };
   gitsigns = {
     type = "github";
     owner = "lewis6991";
@@ -116,13 +109,6 @@
     hash = "sha256-iEFIfr8Fd4qwxF+z16Zj/QZBV3VQJl/mkjCRsypzQvQ=";
     depends = [ "plenary" ];
   };
-  nui = {
-    type = "github";
-    owner = "MunifTanjim";
-    repo = "nui.nvim";
-    rev = "de740991c12411b663994b2860f1a4fd0937c130";
-    hash = "sha256-41slmnvt1z7sCxvpiVuFmQ9g7eCaxQi1dDCL3AxSL1A=";
-  };
   nvim-cmp = {
     type = "github";
     owner = "hrsh7th";
@@ -170,14 +156,6 @@
     repo = "oil.nvim";
     rev = "0fcc83805ad11cf714a949c98c605ed717e0b83e";
     hash = "sha256-hoTQoNEsCbZ0aZMUUUvgkC9NYjovjUUirw2FN9b9dn0=";
-  };
-  package-info = {
-    type = "github";
-    owner = "vuki656";
-    repo = "package-info.nvim";
-    rev = "9725099fb118bab8360e560c1219bff60763b7e1";
-    hash = "sha256-KCA7E766yRnV7XMrcwwpe7m1/pgiqecKtCWVtAlfGfU=";
-    depends = [ "nui" ];
   };
   plenary = {
     type = "github";
