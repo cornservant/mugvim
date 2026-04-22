@@ -164,11 +164,16 @@ function M:base_lsp()
 end
 
 function M:base_commands()
+    local function toggle_format_on_write()
+        vim.g.mugvim_autoformat = not vim.g.mugvim_autoformat
+    end
     vim.api.nvim_create_user_command("MugvimEditUserConfig", function() require("mugvim"):edit_user_config() end, {})
     vim.api.nvim_create_user_command("MugvimVersion", function() print(require("mugvim"):version()) end, {})
-    vim.api.nvim_create_user_command("MugvimToggleFormatOnWrite", function()
-        vim.g.mugvim_autoformat = not vim.g.mugvim_autoformat
-    end, {})
+    vim.api.nvim_create_user_command("MugvimToggleFormatOnWrite", toggle_format_on_write, {})
+
+    require("which-key").add({
+        { "<leader>tf", toggle_format_on_write, desc = "Toggle Format on Write" },
+    })
 end
 
 function M:plugin_which_key()
