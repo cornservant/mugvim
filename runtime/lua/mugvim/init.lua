@@ -34,8 +34,11 @@ function M:init(mugvim_path, runtime_path)
     conf:base_commands()
 
     conf:plugin_which_key()
+    require("bigfile").setup({})
     require("bufferline").setup({})
     conf:plugin_bufferline_editor();
+    require("cloak").setup({})
+    require("Comment").setup({})
     conf:plugin_luasnip()
     conf:plugin_blink_cmp()
     conf:plugin_gitsigns()
