@@ -101,13 +101,6 @@
     rev = "v2.5.0";
     hash = "sha256-diZO1on0rlSp6XuNGN2lNa85rhkNe1QQOejJD+LKkZk=";
   };
-  "mini.pick" = {
-    type = "github";
-    owner = "nvim-mini";
-    repo = "mini.pick";
-    rev = "437d44eb57312f23e6b931704694fc294922cd88";
-    hash = "sha256-aRxyI1k0+d4xMhSL9w2rofY4jinJwmfZ2WalQ6wNHiQ=";
-  };
   multicursor = {
     type = "github";
     owner = "jake-stewart";
@@ -160,14 +153,15 @@
   };
   obsidian = {
     type = "github";
-    owner = "epwalsh";
+    # owner = "epwalsh";
+    owner = "cornservant";
     repo = "obsidian.nvim";
-    rev = "726b60c89f4bafef267a714ea1faa1335bdd414a";
-    hash = "sha256-Uk1EjNRqEwECtNIqZhS66xI7sYbPOLqcS7OpD1TUM50=";
+    rev = "c2be5d6721e362bf9fe2d8d191f5d136217d05e5";
+    hash = "sha256-ufiaWohBpiC8G86XxNrH8SzxoZV0Q8tn0swrbUt2SR0=";
     depends = [
       "plenary"
       "nvim-cmp"
-      "mini.pick"
+      "snacks"
     ];
   };
   oil = {

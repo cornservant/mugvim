@@ -718,7 +718,8 @@ end
 function M:plugin_obsidian()
     if vim.g.mugvim_obsidian_workspaces and true or false then
         require("obsidian").setup({
-            workspaces = vim.g.mugvim_obsidian_workspaces or {}
+            workspaces = vim.g.mugvim_obsidian_workspaces or {},
+            picker = { name = "snacks.pick" },
         })
         require("which-key").add({
             { "<leader>Ob", "<cmd>ObsidianBacklinks<cr>",   desc = "Backlinks" },
