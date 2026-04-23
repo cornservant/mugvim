@@ -421,6 +421,7 @@ function M:plugin_nvim_tree_sitter()
 end
 
 function M:plugin_outline()
+    require("outline").setup({})
     require("which-key").add({
         { "<leader>o", function() require 'outline'.open() end, desc = "Open Outline" }
     })
