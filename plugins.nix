@@ -94,6 +94,20 @@
     rev = "v2.5.0";
     hash = "sha256-diZO1on0rlSp6XuNGN2lNa85rhkNe1QQOejJD+LKkZk=";
   };
+  "mini.jump" = {
+    type = "github";
+    owner = "nvim-mini";
+    repo = "mini.jump";
+    rev = "9e94f41a3ebcd5f5771d36fdedb18fde9d28da76";
+    hash = "sha256-sJS5JSM7TRRcKaabxKokBsuRKrVoxypvi1adQ9h9Jvc=";
+  };
+  "mini.move" = {
+    type = "github";
+    owner = "nvim-mini";
+    repo = "mini.move";
+    rev = "74d140143b1bb905c3d0aebcfc2f216fd237080e";
+    hash = "sha256-+OTW77wcX1I2Ua5W6O7tX/4J22RLTxZ2YviV1Atr7OI=";
+  };
   multicursor = {
     type = "github";
     owner = "jake-stewart";
