@@ -54,8 +54,7 @@ function M:init(mugvim_path, runtime_path)
     conf:plugin_multicursor()
     conf:plugin_obsidian()
     conf:plugin_oil()
-    -- FIXME: keybinds
-    -- conf:plugin_vim_table_mode()
+    conf:plugin_vim_table_mode()
     conf:plugin_outline()
 
     require('mugvim.hooks').run_after_plugin_load_hooks()
