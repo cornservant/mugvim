@@ -1,5 +1,4 @@
 Mugway's Vim Config
-
 ===================
 
 Mugvim is a Nix-based neovim distribution. Try it out by running `nix run git+https://git.loporrit.de/long/mugvim`.
