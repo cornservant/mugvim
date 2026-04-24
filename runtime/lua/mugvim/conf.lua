@@ -776,8 +776,9 @@ function M:plugin_oil()
         delete_to_trash = true,
     })
     require("which-key").add({
-        { "<leader>e",  function() require("oil").open() end,                          desc = "File Browser" },
-        { "<leader>ft", function() require("oil.actions").toggle_trash.callback() end, desc = "Browse Trash" },
+        { "<leader>e",  function() require("oil").open() end,                           desc = "File Browser" },
+        { "<leader>ft", function() require("oil.actions").toggle_trash.callback() end,  desc = "Browse Trash" },
+        { "<leader>th", function() require("oil.actions").toggle_hidden.callback() end, desc = "Oil: Toggle Hidden" },
     })
 end
 
