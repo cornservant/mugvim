@@ -769,11 +769,16 @@ function M:plugin_obsidian()
 end
 
 function M:plugin_oil()
+    local delete_to_trash = true
+    if vim.g.mugvim_oil_delete_to_trash ~= nil then
+        delete_to_trash = vim.g.mugvim_oil_delete_to_trash
+    end
+
     require("oil").setup({
         view_options = {
             show_hidden = true,
         },
-        delete_to_trash = true,
+        delete_to_trash = delete_to_trash,
     })
     require("which-key").add({
         { "<leader>e",  function() require("oil").open() end,                           desc = "File Browser" },

@@ -10,6 +10,7 @@ vim.g.mugvim_obsidian_workspaces = {
         path = "~/git.loporrit.de/obsidian-vault",
     },
 }
+vim.g.mugvim_oil_delete_to_trash = false
 
 require("mugvim.hooks").after_plugin_load(function()
     vim.cmd.colorscheme("tokyonight")

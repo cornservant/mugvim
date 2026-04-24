@@ -37,6 +37,12 @@ vim.g.mugvim_banner = [[
 ]]
 ```
 
+### Customize Oil
+
+```
+vim.g.mugvim_oil_delete_to_trash = false
+```
+
 ### Custom Plugins
 
 ```lua
