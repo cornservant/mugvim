@@ -727,22 +727,34 @@ function M:plugin_multicursor()
 end
 
 function M:plugin_obsidian()
-    if vim.g.mugvim_obsidian_workspaces and true or false then
-        require("obsidian").setup({
-            workspaces = vim.g.mugvim_obsidian_workspaces or {},
-            picker = { name = "snacks.pick" },
-        })
-        require("which-key").add({
-            { "<leader>Ob", "<cmd>ObsidianBacklinks<cr>",   desc = "Backlinks" },
-            { "<leader>On", "<cmd>ObsidianNew<cr>",         desc = "New" },
-            { "<leader>Oo", "<cmd>ObsidianOpen<cr>",        desc = "Open" },
-            { "<leader>Ot", "<cmd>ObsidianToday<cr>",       desc = "Today" },
-            { "<leader>Oq", "<cmd>ObsidianQuickSwitch<cr>", desc = "QuickSwitch" },
-            { "<leader>Of", "<cmd>ObsidianFollowLink<cr>",  desc = "FollowLink" },
-            { "<leader>Os", "<cmd>ObsidianSearch<cr>",      desc = "Search" },
-            { "<leader>Od", "<cmd>ObsidianDailies<cr>",     desc = "Dailies" },
-        })
-    end
+    local obsidian_loaded = false
+    require("which-key").add({
+        {
+            "<leader>O",
+            group = "Obsidian",
+            expand = function()
+                if not obsidian_loaded then
+                    obsidian_loaded = true
+                    if vim.g.mugvim_obsidian_workspaces and true or false then
+                        require("obsidian").setup({
+                            workspaces = vim.g.mugvim_obsidian_workspaces or {},
+                            picker = { name = "snacks.pick" },
+                        })
+                    end
+                end
+                return {
+                    { "b", vim.cmd.ObsidianBacklinks,   desc = "Backlinks" },
+                    { "n", vim.cmd.ObsidianNew,         desc = "New" },
+                    { "o", vim.cmd.ObsidianOpen,        desc = "Open" },
+                    { "t", vim.cmd.ObsidianToday,       desc = "Today" },
+                    { "q", vim.cmd.ObsidianQuickSwitch, desc = "QuickSwitch" },
+                    { "f", vim.cmd.ObsidianFollowLink,  desc = "FollowLink" },
+                    { "s", vim.cmd.ObsidianSearch,      desc = "Search" },
+                    { "d", vim.cmd.ObsidianDailies,     desc = "Dailies" },
+                }
+            end
+        },
+    })
 end
 
 function M:plugin_oil()
