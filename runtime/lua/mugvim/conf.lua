@@ -339,9 +339,20 @@ function M:plugin_gitsigns()
 end
 
 function M:plugin_neogit()
-    require("neogit").setup({})
+    local neogit_loaded = false
     require("which-key").add({
-        { "<leader>gg", function() require('neogit').open() end, desc = "Neogit" },
+        {
+            "<leader>gg",
+            function()
+                if not neogit_loaded then
+                    neogit_loaded = true
+                    require("neogit").setup({})
+                end
+
+                require('neogit').open()
+            end,
+            desc = "Neogit"
+        },
     })
 end
 
