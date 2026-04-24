@@ -1,33 +1,33 @@
 {
   stdenv,
   lib,
-  tree-sitter,
-  zig,
-  imagemagick,
-  typst,
   neovim,
+  tree-sitter,
   ripgrep,
   blink-fuzzy-lib,
   fetchFromGitHub,
   fetchgit,
   writeTextFile,
+  imagemagick,
+  include_imagemagick ? true,
+  ghostscript,
+  include_ghostscript ? false,
+  tectonic,
+  include_tectonic ? false,
+  mermaid-cli,
+  include_mermaid-cli ? false,
 }:
 let
   version = lib.trimWith { end = true; } (builtins.readFile ./VERSION);
-  base-deps = [
+  deps = [
     neovim
-  ];
-  obsidian-deps = [
-    ripgrep
-  ];
-  tree-sitter-deps = [
     tree-sitter
-    zig
-  ];
-  snacks-image-deps = [
-    imagemagick
-    typst
-  ];
+    ripgrep
+  ]
+  ++ (if include_imagemagick then [ imagemagick ] else [ ])
+  ++ (if include_ghostscript then [ ghostscript ] else [ ])
+  ++ (if include_tectonic then [ tectonic ] else [ ])
+  ++ (if include_mermaid-cli then [ mermaid-cli ] else [ ]);
   plugins = lib.mapAttrs (
     name: spec:
     if !(lib.hasAttr "type" spec) then
@@ -68,9 +68,7 @@ stdenv.mkDerivation rec {
       #!/usr/bin/env sh
       export NVIM_APPNAME=${NVIM_APPNAME}
       export MUGVIM_BASE_DIR=$(realpath "$(dirname "$(realpath "$0")")/..")
-      export PATH="${
-        lib.makeBinPath (base-deps ++ tree-sitter-deps ++ obsidian-deps ++ snacks-image-deps)
-      }:$PATH"
+      export PATH="${lib.makeBinPath deps}:$PATH"
       ${lib.getExe neovim} -u "$MUGVIM_BASE_DIR/init.lua" "$@"
     '';
   };
