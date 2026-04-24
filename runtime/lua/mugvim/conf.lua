@@ -313,13 +313,35 @@ function M:plugin_blink_cmp()
 end
 
 function M:plugin_bufferline_editor()
-    require("bufferline-editor").setup({
-        max_width = 80,
-        max_height = 24,
-    })
+    local bufferline_editor_loaded = false
+
+    local ensure_bufferline_editor_loaded = function()
+        if not bufferline_editor_loaded then
+            bufferline_editor_loaded = true
+            require("bufferline-editor").setup({
+                max_width = 80,
+                max_height = 24,
+            })
+        end
+    end
+
     require("which-key").add({
-        { "<c-e>",      function() require("bufferline-editor").editor_toggle() end, desc = "Edit Buffers" },
-        { "<leader>be", function() require("bufferline-editor").editor_toggle() end, desc = "Edit Buffers" },
+        {
+            "<c-e>",
+            function()
+                ensure_bufferline_editor_loaded()
+                require("bufferline-editor").editor_toggle()
+            end,
+            desc = "Edit Buffers"
+        },
+        {
+            "<leader>be",
+            function()
+                ensure_bufferline_editor_loaded()
+                require("bufferline-editor").editor_toggle()
+            end,
+            desc = "Edit Buffers"
+        },
     })
 end
 
