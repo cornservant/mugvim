@@ -645,10 +645,12 @@ Bram Moolenaar]]
         notifier = { enabled = true },
         picker = { enabled = true },
         quickfile = { enabled = true },
+        zen = { enabled = true },
     })
 
     require("which-key").add({
         { "<leader>bd",      function() require("snacks.bufdelete").delete() end,                              desc = "Delete Buffer" },
+        { "<leader>tz",      function() require("snacks.zen").zen() end,                                       desc = "Toggle Zen Mode" },
         -- Top Pickers & Explorer
         { "<leader><space>", function() require 'snacks.picker'.smart() end,                                   desc = "Smart Find Files" },
         { "<leader>,",       function() require 'snacks.picker'.buffers() end,                                 desc = "Buffers" },
