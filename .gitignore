@@ -1,7 +1,2 @@
-data/
-log/
-state/
-cache/
-config/plugin/packer_compiled.lua
-README.html
+pack
 result
