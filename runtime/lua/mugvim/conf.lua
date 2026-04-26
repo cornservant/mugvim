@@ -838,4 +838,9 @@ function M:plugin_vim_table_mode()
     end)
 end
 
+function M:plugin_mini()
+    require("mini.jump").setup({})
+    require("mini.move").setup({})
+end
+
 return M
