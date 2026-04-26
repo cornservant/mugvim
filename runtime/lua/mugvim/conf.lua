@@ -648,6 +648,7 @@ Bram Moolenaar]]
     })
 
     require("which-key").add({
+        { "<leader>bd",      function() require("snacks.bufdelete").delete() end,                              desc = "Delete Buffer" },
         -- Top Pickers & Explorer
         { "<leader><space>", function() require 'snacks.picker'.smart() end,                                   desc = "Smart Find Files" },
         { "<leader>,",       function() require 'snacks.picker'.buffers() end,                                 desc = "Buffers" },
