@@ -34,7 +34,6 @@ function M:init(mugvim_path, runtime_path)
     conf:base_commands()
 
     conf:plugin_which_key()
-    require("bigfile").setup({})
     require("bufferline").setup({})
     conf:plugin_bufferline_editor();
     require("cloak").setup({})

@@ -1,11 +1,4 @@
 {
-  bigfile = {
-    type = "github";
-    owner = "LunarVim";
-    repo = "bigfile.nvim";
-    rev = "33eb067e3d7029ac77e081cfe7c45361887a311a";
-    hash = "sha256-fabA2mVZAZg5Qot4ED9cJ1YMZ4wX4OvURNhIvKltFtA=";
-  };
   editorconfig = {
     type = "github";
     owner = "editorconfig";
