@@ -785,6 +785,11 @@ end
 
 function M:plugin_fff()
     local fff = require("fff")
+    fff.setup({
+        keymaps = {
+            close = { '<Esc>', '<C-c>', },
+        }
+    })
     require("which-key").add({
         {
             "<leader>/",
