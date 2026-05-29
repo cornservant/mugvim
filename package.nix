@@ -1,6 +1,7 @@
 {
   stdenv,
   lib,
+  fetchgit,
   neovim,
   vimPlugins,
   vimUtils,
@@ -23,6 +24,19 @@ let
     inherit version;
     src = ./runtime;
   };
+  bufferline-editor-nvim = vimUtils.buildVimPlugin rec {
+    pname = "bufferline-editor-nvim";
+    version = "0.2.1";
+    src = fetchgit {
+      url = "https://git.loporrit.de/long/bufferline-editor.nvim";
+      rev = version;
+      hash = "sha256-rrurGpDyoHBgKKJxUOxzPnmDpRqYFMCXKsoIk1UsrHg=";
+    };
+    dependencies = with vimPlugins; [
+      bufferline-nvim
+      nvim-web-devicons
+    ];
+  };
   neovim_with_plugins = neovim.override {
     configure = {
       customRC = ''
@@ -35,6 +49,7 @@ let
           editorconfig-nvim
           blink-cmp
           bufferline-nvim
+          bufferline-editor-nvim
           cloak-nvim
           comment-nvim
           gitsigns-nvim
