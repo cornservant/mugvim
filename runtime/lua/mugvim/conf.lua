@@ -773,20 +773,21 @@ function M:plugin_obsidian()
                     obsidian_loaded = true
                     if vim.g.mugvim_obsidian_workspaces and true or false then
                         require("obsidian").setup({
+                            legacy_commands = false,
                             workspaces = vim.g.mugvim_obsidian_workspaces or {},
                             picker = { name = "snacks.pick" },
                         })
                     end
                 end
                 return {
-                    { "b", vim.cmd.ObsidianBacklinks,   desc = "Backlinks" },
-                    { "n", vim.cmd.ObsidianNew,         desc = "New" },
-                    { "o", vim.cmd.ObsidianOpen,        desc = "Open" },
-                    { "t", vim.cmd.ObsidianToday,       desc = "Today" },
-                    { "q", vim.cmd.ObsidianQuickSwitch, desc = "QuickSwitch" },
-                    { "f", vim.cmd.ObsidianFollowLink,  desc = "FollowLink" },
-                    { "s", vim.cmd.ObsidianSearch,      desc = "Search" },
-                    { "d", vim.cmd.ObsidianDailies,     desc = "Dailies" },
+                    { "b", function() vim.cmd.Obsidian("backlinks") end,   desc = "Backlinks" },
+                    { "n", function() vim.cmd.Obsidian("new") end,         desc = "New" },
+                    { "o", function() vim.cmd.Obsidian("open") end,        desc = "Open" },
+                    { "t", function() vim.cmd.Obsidian("today") end,       desc = "Today" },
+                    { "q", function() vim.cmd.Obsidian("quickSwitch") end, desc = "QuickSwitch" },
+                    { "f", function() vim.cmd.Obsidian("followLink") end,  desc = "FollowLink" },
+                    { "s", function() vim.cmd.Obsidian("search") end,      desc = "Search" },
+                    { "d", function() vim.cmd.Obsidian("dailies") end,     desc = "Dailies" },
                 }
             end
         },
