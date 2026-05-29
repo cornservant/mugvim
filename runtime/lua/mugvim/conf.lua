@@ -581,7 +581,6 @@ Bram Moolenaar]]
         image = { enabled = true },
         notifier = { enabled = true },
         picker = { enabled = true },
-        quickfile = { enabled = true },
         zen = { enabled = true },
     })
 
