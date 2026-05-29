@@ -3,10 +3,9 @@
   lib,
   neovim,
   vimPlugins,
+  vimUtils,
   tree-sitter,
   ripgrep,
-  fetchFromGitHub,
-  fetchgit,
   writeTextFile,
   imagemagick,
   include_imagemagick ? true,
@@ -19,9 +18,19 @@
 }:
 let
   version = lib.trimWith { end = true; } (builtins.readFile ./VERSION);
+  mugvim-lib = vimUtils.buildVimPlugin {
+    pname = "mugvim-lib";
+    inherit version;
+    src = ./runtime;
+  };
   neovim_with_plugins = neovim.override {
     configure = {
-      packages.testvim = {
+      customRC = ''
+        lua <<EOF
+            require("mugvim"):init("${version}")
+        EOF
+      '';
+      packages.mugvim = {
         start = with vimPlugins; [
           editorconfig-nvim
           blink-cmp
@@ -59,6 +68,7 @@ let
           vim-table-mode
           which-key-nvim
           fff-nvim
+          mugvim-lib
         ];
       };
     };
@@ -71,27 +81,6 @@ let
   ++ (if include_ghostscript then [ ghostscript ] else [ ])
   ++ (if include_tectonic then [ tectonic ] else [ ])
   ++ (if include_mermaid-cli then [ mermaid-cli ] else [ ]);
-  plugins = lib.mapAttrs (
-    name: spec:
-    if !(lib.hasAttr "type" spec) then
-      abort "plugin '${name}' does not specify a 'type' attribute'"
-    else if spec.type == "github" then
-      fetchFromGitHub {
-        inherit (spec)
-          owner
-          repo
-          rev
-          hash
-          ;
-      }
-    else if spec.type == "git" then
-      fetchgit {
-        inherit name;
-        inherit (spec) url rev hash;
-      }
-    else
-      abort "unknown plugin type ${spec.type}"
-  ) (import ./plugins.nix);
 in
 stdenv.mkDerivation rec {
   pname = "mvim";
@@ -110,19 +99,13 @@ stdenv.mkDerivation rec {
     text = ''
       #!/usr/bin/env sh
       export NVIM_APPNAME=${NVIM_APPNAME}
-      export MUGVIM_BASE_DIR=$(realpath "$(dirname "$(realpath "$0")")/..")
       export PATH="${lib.makeBinPath deps}:$PATH"
-      ${lib.getExe neovim_with_plugins} -u "$MUGVIM_BASE_DIR/init.lua" "$@"
+      ${lib.getExe neovim_with_plugins} "$@"
     '';
   };
 
   installPhase = ''
-    install -m 444 -D $src/init.lua   $out/init.lua
-    install -m 444 -D $src/VERSION    $out/VERSION
     install -m 555 -D ${application}  $out/bin/mvim
-    cp -r             $src/runtime    $out/runtime
-    find                              $out/runtime -type d -exec chmod 755 {} +
-    mkdir -p                          $out/pack/default/start
     install -m 444 -D $src/resources/mugvim.desktop \
       $out/share/applications/mugvim.desktop
     install -m 444 -D $src/resources/mugvim.svg \

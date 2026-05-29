@@ -1,15 +1,12 @@
 local M = {
-    mugvim_path = nil,
-    runtime_path = nil,
+    _version = nil,
 }
 
 local conf = require("mugvim.conf")
 local util = require("mugvim.util")
 
 function M:version()
-    local version_file = M.mugvim_path .. "/VERSION"
-    local version = vim.fn.readfile(version_file)[1]
-    return version
+    return M._version
 end
 
 function M:user_config_path()
@@ -20,9 +17,8 @@ function M:edit_user_config()
     vim.cmd.edit(M:user_config_path())
 end
 
-function M:init(mugvim_path, runtime_path)
-    M.mugvim_path = mugvim_path
-    M.runtime_path = runtime_path
+function M:init(version)
+    M._version = version
 
     conf:fix_bufferline_colors()
     conf:load_user_config()
