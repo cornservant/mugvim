@@ -2,9 +2,9 @@
   stdenv,
   lib,
   neovim,
+  vimPlugins,
   tree-sitter,
   ripgrep,
-  blink-fuzzy-lib,
   fetchFromGitHub,
   fetchgit,
   writeTextFile,
@@ -19,8 +19,50 @@
 }:
 let
   version = lib.trimWith { end = true; } (builtins.readFile ./VERSION);
+  neovim_with_plugins = neovim.override {
+    configure = {
+      packages.testvim = {
+        start = with vimPlugins; [
+          editorconfig-nvim
+          blink-cmp
+          bufferline-nvim
+          cloak-nvim
+          comment-nvim
+          gitsigns-nvim
+          kanagawa-nvim
+          lsp_lines-nvim
+          nvim-lspconfig
+          lualine-nvim
+          luasnip
+          mini-jump
+          mini-move
+          multicursor-nvim
+          neogit
+          nvim-cmp
+          nvim-treesitter
+          nvim-treesitter-context
+          nvim-web-devicons
+          obsidian-nvim
+          oil-nvim
+          plenary-nvim
+          rose-pine
+          vim-surround
+          vim-repeat
+          vim-just
+          vim-peekaboo
+          outline-nvim
+          snacks-nvim
+          todo-comments-nvim
+          trouble-nvim
+          tokyonight-nvim
+          undotree
+          vim-table-mode
+          which-key-nvim
+        ];
+      };
+    };
+  };
   deps = [
-    neovim
     tree-sitter
     ripgrep
   ]
@@ -69,41 +111,20 @@ stdenv.mkDerivation rec {
       export NVIM_APPNAME=${NVIM_APPNAME}
       export MUGVIM_BASE_DIR=$(realpath "$(dirname "$(realpath "$0")")/..")
       export PATH="${lib.makeBinPath deps}:$PATH"
-      ${lib.getExe neovim} -u "$MUGVIM_BASE_DIR/init.lua" "$@"
+      ${lib.getExe neovim_with_plugins} -u "$MUGVIM_BASE_DIR/init.lua" "$@"
     '';
   };
 
-  installPhase =
-    let
-      installPlugins = lib.join "" (
-        lib.mapAttrsToList (name: plugin: ''
-          cp -r ${plugin} $out/pack/default/start/${name}
-          find $out/pack/default/start/${name} -type d -exec chmod 755 {} +
-        '') plugins
-      );
-
-      installBlinkFuzzyLib =
-        if lib.hasAttr "blink.cmp" plugins then
-          ''
-            mkdir -p $out/pack/default/start/blink.cmp/target/release
-            install -m 555 -D ${blink-fuzzy-lib}/lib/libblink_cmp_fuzzy.so \
-              $out/pack/default/start/blink.cmp/target/release/libblink_cmp_fuzzy.so
-          ''
-        else
-          "";
-    in
-    ''
-      install -m 444 -D $src/init.lua   $out/init.lua
-      install -m 444 -D $src/VERSION    $out/VERSION
-      install -m 555 -D ${application}  $out/bin/mvim
-      cp -r             $src/runtime    $out/runtime
-      find                              $out/runtime -type d -exec chmod 755 {} +
-      mkdir -p                          $out/pack/default/start
-      ${installPlugins}
-      ${installBlinkFuzzyLib}
-      install -m 444 -D $src/resources/mugvim.desktop \
-        $out/share/applications/mugvim.desktop
-      install -m 444 -D $src/resources/mugvim.svg \
-        $out/share/icons/hicolor/scalable/apps/mugvim.svg
-    '';
+  installPhase = ''
+    install -m 444 -D $src/init.lua   $out/init.lua
+    install -m 444 -D $src/VERSION    $out/VERSION
+    install -m 555 -D ${application}  $out/bin/mvim
+    cp -r             $src/runtime    $out/runtime
+    find                              $out/runtime -type d -exec chmod 755 {} +
+    mkdir -p                          $out/pack/default/start
+    install -m 444 -D $src/resources/mugvim.desktop \
+      $out/share/applications/mugvim.desktop
+    install -m 444 -D $src/resources/mugvim.svg \
+      $out/share/icons/hicolor/scalable/apps/mugvim.svg
+  '';
 }
