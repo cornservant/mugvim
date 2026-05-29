@@ -654,13 +654,13 @@ Bram Moolenaar]]
         -- Top Pickers & Explorer
         { "<leader><space>", function() require 'snacks.picker'.smart() end,                                   desc = "Smart Find Files" },
         { "<leader>,",       function() require 'snacks.picker'.buffers() end,                                 desc = "Buffers" },
-        { "<leader>/",       function() require 'snacks.picker'.grep() end,                                    desc = "Grep" },
+        -- { "<leader>/",       function() require 'snacks.picker'.grep() end,                                    desc = "Grep" },
         { "<leader>:",       function() require 'snacks.picker'.command_history() end,                         desc = "Command History" },
         { "<leader>E",       function() require 'snacks'.explorer() end,                                       desc = "File Explorer" },
         -- find
         { "<leader>fb",      function() require 'snacks.picker'.buffers() end,                                 desc = "Buffers" },
         { "<leader>fc",      function() require 'snacks.picker'.files({ cwd = vim.fn.stdpath("config") }) end, desc = "Find Config File" },
-        { "<leader>ff",      function() require 'snacks.picker'.files() end,                                   desc = "Find Files" },
+        -- { "<leader>ff",      function() require 'snacks.picker'.files() end,                                   desc = "Find Files" },
         { "<leader>fg",      function() require 'snacks.picker'.git_files() end,                               desc = "Find Git Files" },
         { "<leader>fp",      function() require 'snacks.picker'.projects() end,                                desc = "Projects" },
         { "<leader>fr",      function() require 'snacks.picker'.recent() end,                                  desc = "Recent" },
@@ -845,6 +845,26 @@ end
 function M:plugin_mini()
     require("mini.jump").setup({})
     require("mini.move").setup({})
+end
+
+function M:plugin_fff()
+    local fff = require("fff")
+    require("which-key").add({
+        {
+            "<leader>/",
+            function()
+                fff.live_grep()
+            end,
+            desc = "Command History"
+        },
+        {
+            "<leader>ff",
+            function()
+                fff.find_files()
+            end,
+            desc = "Find Files"
+        },
+    })
 end
 
 return M

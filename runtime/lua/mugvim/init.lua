@@ -56,6 +56,7 @@ function M:init(mugvim_path, runtime_path)
     conf:plugin_vim_table_mode()
     conf:plugin_outline()
     conf:plugin_mini()
+    conf:plugin_fff()
 
     require('mugvim.hooks').run_after_plugin_load_hooks()
 end

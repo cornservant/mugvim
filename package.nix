@@ -58,6 +58,7 @@ let
           undotree
           vim-table-mode
           which-key-nvim
+          fff-nvim
         ];
       };
     };
