@@ -30,6 +30,7 @@ function M:init(version)
     conf:base_commands()
 
     conf:plugin_which_key()
+    conf:plugin_nvim_tree_sitter()
     require("bufferline").setup({})
     conf:plugin_bufferline_editor();
     require("cloak").setup({})
