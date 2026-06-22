@@ -7,6 +7,7 @@
   vimUtils,
   tree-sitter,
   ripgrep,
+  git,
   writeTextFile,
   imagemagick,
   include_imagemagick ? true,
@@ -91,6 +92,7 @@ let
   deps = [
     tree-sitter
     ripgrep
+    git
   ]
   ++ (if include_imagemagick then [ imagemagick ] else [ ])
   ++ (if include_ghostscript then [ ghostscript ] else [ ])
