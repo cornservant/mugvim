@@ -126,4 +126,10 @@ stdenv.mkDerivation rec {
     install -m 444 -D $src/resources/mugvim.svg \
       $out/share/icons/hicolor/scalable/apps/mugvim.svg
   '';
+
+  meta = {
+    description = "Mug's neovim distribution";
+    license = lib.licenses.asl20;
+    mainProgram = pname;
+  };
 }
