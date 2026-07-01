@@ -814,4 +814,19 @@ function M:plugin_fff()
     })
 end
 
+function M:plugin_haunt()
+    require("haunt").setup({
+        picker = "snacks",
+    })
+    require("which-key").add({
+        { "<leader>ha", require("haunt.api").annotate,          desc = "Annotate" },
+        { "<leader>hd", require("haunt.api").delete,            desc = "Delete" },
+        { "<leader>hh", require("haunt.picker").show,           desc = "Show Picker" },
+        { "<leader>hq", require("haunt.api").to_quickfix,       desc = "Quickfix List" },
+        { "<leader>ht", require("haunt.api").toggle_annotation, desc = "Toggle Haunts" },
+        { "[h",         require("haunt.api").next,              desc = "Next Haunt" },
+        { "]h",         require("haunt.api").prev,              desc = "Previous Haunt" },
+    })
+end
+
 return M

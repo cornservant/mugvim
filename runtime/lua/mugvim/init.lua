@@ -54,6 +54,7 @@ function M:init(version)
     conf:plugin_outline()
     conf:plugin_mini()
     conf:plugin_fff()
+    conf:plugin_haunt()
 
     require('mugvim.hooks').run_after_plugin_load_hooks()
 end

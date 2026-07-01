@@ -2,6 +2,7 @@
   stdenv,
   lib,
   fetchgit,
+  fetchFromGitHub,
   neovim,
   vimPlugins,
   vimUtils,
@@ -36,6 +37,19 @@ let
     dependencies = with vimPlugins; [
       bufferline-nvim
       nvim-web-devicons
+    ];
+  };
+  haunt-nvim = vimUtils.buildVimPlugin rec {
+    pname = "haunt-nvim";
+    version = "1.3.0";
+    src = fetchFromGitHub {
+      owner = "TheNoeTrevino";
+      repo = "haunt.nvim";
+      rev = "v${version}";
+      hash = "sha256-MieiFpcuTgNAJOBoflIMfzipxat49dGusEoFFS81/hg=";
+    };
+    dependencies = with vimPlugins; [
+      snacks-nvim
     ];
   };
   neovim_with_plugins = neovim.override {
@@ -84,6 +98,7 @@ let
           vim-table-mode
           which-key-nvim
           fff-nvim
+          haunt-nvim
           mugvim-lib
         ];
       };
