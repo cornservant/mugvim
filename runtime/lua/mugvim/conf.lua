@@ -347,7 +347,12 @@ function M:plugin_bufferline_editor()
 end
 
 function M:plugin_gitsigns()
-    require("gitsigns").setup({})
+    require("gitsigns").setup({
+        current_line_blame = vim.g.mugvim_blame_lines,
+        current_line_blame_opts = {
+            delay = 16,
+        },
+    })
     require("which-key").add({
         { "[g",         function() require('gitsigns').next_hunk({ navigation_message = false }) end, desc = "Next Hunk" },
         { "]g",         function() require('gitsigns').prev_hunk({ navigation_message = false }) end, desc = "Prev Hunk" },
@@ -358,6 +363,7 @@ function M:plugin_gitsigns()
         { "<leader>gs", function() require('gitsigns').stage_hunk() end,                              desc = "Stage Hunk" },
         { "<leader>gu", function() require('gitsigns').undo_stage_hunk() end,                         desc = "Undo Stage Hunk" },
         { "<leader>gd", function() require('gitsigns').diffthis() end,                                desc = "Git Diff" },
+        { "<leader>tb", function() require('gitsigns').toggle_current_line_blame() end,               desc = "Toggle Blame Lines" },
     })
 end
 

@@ -43,6 +43,13 @@ vim.g.mugvim_banner = [[
 vim.g.mugvim_oil_delete_to_trash = false
 ```
 
+### Show Blame Lines
+
+```lua
+vim.g.mugvim_blame_lines = true
+```
+
+
 ### Custom Plugins
 
 ```lua
