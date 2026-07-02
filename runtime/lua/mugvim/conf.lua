@@ -385,8 +385,8 @@ function M:plugin_neogit()
     })
 end
 
-function M:plugin_nvim_tree_sitter()
     require 'nvim-treesitter'.update({ summary = true })
+function M:plugin_nvim_treesitter()
 
     vim.filetype.add({
         extension = {
