@@ -385,8 +385,20 @@ function M:plugin_neogit()
     })
 end
 
-    require 'nvim-treesitter'.update({ summary = true })
 function M:plugin_nvim_treesitter()
+    vim.api.nvim_create_autocmd("FileType", {
+        pattern = "*",
+        callback = function()
+            local ft = vim.bo.filetype
+            if not ft or ft == "" or vim.bo.buftype ~= "" then
+                return
+            end
+            if pcall(vim.treesitter.query.get, ft, "highlights") then
+                pcall(vim.treesitter.start)
+            end
+        end
+    })
+    require("nvim-treesitter").update({ summary = true })
 
     vim.filetype.add({
         extension = {
