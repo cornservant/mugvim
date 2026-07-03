@@ -140,7 +140,7 @@ return {
         end)
 
         if not ok then
-            vim.notify('cargo could not be found')
+            vim.notify('[rust_analyzer] Cargo could not be found', vim.log.levels.WARN)
         end
     end,
     capabilities = {
