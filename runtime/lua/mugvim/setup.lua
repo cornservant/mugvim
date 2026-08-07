@@ -568,6 +568,15 @@ Bram Moolenaar]]
                         key = 'n',
                     },
                     {
+                        icon = '󰝒  ',
+                        desc = 'New Buffer (Zen Mode)  ',
+                        action = function()
+                            vim.cmd('enew')
+                            require("snacks.zen").zen()
+                        end,
+                        key = 'z',
+                    },
+                    {
                         icon = '󱋡  ',
                         desc = 'Recent Files           ',
                         action = function() require 'snacks.picker'.recent() end,
