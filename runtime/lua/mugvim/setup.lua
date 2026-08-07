@@ -609,6 +609,11 @@ Bram Moolenaar]]
         notifier = { enabled = true },
         picker = { enabled = true },
         zen = { enabled = true },
+        styles = {
+            zen = {
+                backdrop = { transparent = false },
+            }
+        },
     })
 
     require("which-key").add({
