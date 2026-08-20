@@ -399,14 +399,6 @@ function M:plugin_nvim_treesitter()
         end
     })
     require("nvim-treesitter").update({ summary = true })
-
-    vim.filetype.add({
-        extension = {
-            c3 = "c3",
-            c3i = "c3",
-            c3t = "c3",
-        },
-    })
 end
 
 function M:plugin_outline()
