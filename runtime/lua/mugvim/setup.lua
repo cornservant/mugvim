@@ -398,7 +398,13 @@ function M:plugin_nvim_treesitter()
             end
         end
     })
-    require("nvim-treesitter").update({ summary = true })
+    require("which-key").add({
+        {
+            "<leader>+t",
+            function() require("nvim-treesitter").update({ summary = true }) end,
+            desc = "Update Treesitter Parsers"
+        },
+    })
 end
 
 function M:plugin_outline()
