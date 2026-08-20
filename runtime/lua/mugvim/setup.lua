@@ -407,15 +407,6 @@ function M:plugin_nvim_treesitter()
             c3t = "c3",
         },
     })
-
-    local parser_config = require "nvim-treesitter.parsers"
-    parser_config.c3 = {
-        install_info = {
-            url = "https://github.com/c3lang/tree-sitter-c3",
-            files = { "src/parser.c", "src/scanner.c" },
-            branch = "main",
-        },
-    }
 end
 
 function M:plugin_outline()
