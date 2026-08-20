@@ -78,7 +78,11 @@ let
           multicursor-nvim
           neogit
           nvim-cmp
-          nvim-treesitter
+          (nvim-treesitter.overrideAttrs (oldAttrs: {
+            patches = (oldAttrs.patches or [ ]) ++ [
+              ./0001-fix-stale-symlinks-into-nix-store-when-using-nix.patch
+            ];
+          }))
           nvim-treesitter-context
           nvim-web-devicons
           obsidian-nvim
