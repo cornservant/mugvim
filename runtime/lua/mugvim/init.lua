@@ -55,6 +55,7 @@ function M:init(version)
     setup:plugin_mini()
     setup:plugin_fff()
     setup:plugin_haunt()
+    setup:plugin_dap_and_dapui()
 
     require('mugvim.hooks').run_after_plugin_load_hooks()
 end

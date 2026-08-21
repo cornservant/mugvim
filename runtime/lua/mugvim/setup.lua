@@ -844,4 +844,56 @@ function M:plugin_haunt()
     })
 end
 
+function M:plugin_dap_and_dapui()
+    local dap = require("dap")
+    local dapui = require("dapui")
+
+    dapui.setup()
+
+    dap.adapters.gdb = {
+        type = 'executable',
+        command = 'rust-gdb',
+        args = { '--interpreter=dap' }
+    }
+    dap.configurations.rust = {
+        {
+            name = "Launch test binary (rust-gdb)",
+            type = "gdb",
+            request = "launch",
+            program = function()
+                -- Automatically find or prompt for the binary path
+                return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/target/debug/deps/', 'file')
+            end,
+            args = function()
+                local args_str = vim.fn.input('Test filter args (e.g., my_test --exact): ')
+                return vim.split(args_str, " ")
+            end,
+            cwd = '${workspaceFolder}',
+            stopAtBeginningOfMainSubprogram = false,
+        },
+    }
+    dap.listeners.before.attach.dapui_config = function()
+        dapui.open()
+    end
+    dap.listeners.before.launch.dapui_config = function()
+        dapui.open()
+    end
+    dap.listeners.before.event_terminated.dapui_config = function()
+        dapui.close()
+    end
+    dap.listeners.before.event_exited.dapui_config = function()
+        dapui.close()
+    end
+
+    require("which-key").add({
+        { "<leader>dd", vim.cmd.DapNew,        desc = "Start Debug Session" },
+        { "<leader>dt", dapui.toggle,          desc = "Toggle Debug UI" },
+        { "<leader>db", dap.toggle_breakpoint, desc = "Toggle Breakpoint" },
+        { "<F5>",       dap.continue,          desc = "Dap Continue" },
+        { "<F10>",      dap.step_over,         desc = "Dap Step Over" },
+        { "<F11>",      dap.step_into,         desc = "Dap Step Into" },
+        { "<F12>",      dap.step_out,          desc = "Dap Step Out" },
+    })
+end
+
 return M

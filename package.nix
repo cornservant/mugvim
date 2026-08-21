@@ -103,6 +103,8 @@ let
           which-key-nvim
           fff-nvim
           haunt-nvim
+          nvim-dap
+          nvim-dap-ui
           mugvim-lib
         ];
       };
