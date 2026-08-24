@@ -35,28 +35,32 @@ local function reload_workspace(bufnr)
   end
 end
 
----@param opt { notify_on_error: boolean? }
----@return string|nil
-local function get_rustc(opt)
-    local command = os.getenv 'RUSTC' or 'rustc'
-    local ok, _ = pcall(vim.system, { command })
-    if ok then
-      return command
-    elseif opt.notify_on_error then
-      vim.notify("[rust_analyzer] `rustc` (Rust compiler) not found. Please make sure it is installed and your PATH or RUSTC environment variables are set up correctly.", vim.log.levels.ERROR)
-    end
-end
+---@param command string
+---@param opt { env_override: string? }?
+---@return boolean
+local function executable_exists(command, opt)
+  opt = opt or {}
+  local env_command = opt.env_override and os.getenv(opt.env_override)
+  local ok = false
+  local error_msg = ''
 
----@param opt { notify_on_error: boolean? }
----@return string|nil
-local function get_cargo(opt)
-    local command = 'cargo'
-    local ok, _ = pcall(vim.system, { command })
-    if ok then
-      return command
-    elseif opt.notify_on_error then
-      vim.notify("[rust_analyzer] `cargo` (Rust package manager) not found. Please make sure it is installed.", vim.log.levels.ERROR)
-    end
+  if env_command then
+    ok = vim.fn.executable(env_command) == 1
+    error_msg = ('%s not found. Please make sure the environment variable %s points to the %s executable or unset it.'):format(
+      command,
+      opt.env_override,
+      command
+    )
+  else
+    ok = vim.fn.executable(command) == 1
+    error_msg = ('%s not found. Please make sure it is installed.'):format(command)
+  end
+
+  if not ok then
+    vim.notify_once(('[rust_analyzer] %s'):format(error_msg), vim.log.levels.WARN)
+  end
+
+  return ok
 end
 
 local function user_sysroot_src()
@@ -66,10 +70,7 @@ end
 local function default_sysroot_src()
   local sysroot = vim.tbl_get(vim.lsp.config['rust_analyzer'], 'settings', 'rust-analyzer', 'cargo', 'sysroot')
   if not sysroot then
-    local rustc = get_rustc({ notify_on_error = true })
-    if not rustc then
-      return
-    end
+    local rustc = os.getenv 'RUSTC' or 'rustc'
     local result = vim.system({ rustc, '--print', 'sysroot' }, { text = true }):wait()
 
     local stdout = result.stdout
@@ -89,8 +90,6 @@ local function default_sysroot_src()
   return sysroot and vim.fs.joinpath(sysroot, 'lib/rustlib/src/rust/library') or nil
 end
 
----@param fname string
----@return boolean
 local function is_library(fname)
   local user_home = vim.fs.normalize(vim.env.HOME)
   local cargo_home = os.getenv 'CARGO_HOME' or user_home .. '/.cargo'
@@ -104,10 +103,10 @@ local function is_library(fname)
 
   for _, item in ipairs { toolchains, registry, git_registry, sysroot_src } do
     if item and vim.fs.relpath(item, fname) then
-      return true
+      local clients = vim.lsp.get_clients { name = 'rust_analyzer' }
+      return #clients > 0 and clients[#clients].config.root_dir or nil
     end
   end
-  return false
 end
 
 ---@type vim.lsp.Config
@@ -115,24 +114,15 @@ return {
   cmd = { 'rust-analyzer' },
   filetypes = { 'rust' },
   root_dir = function(bufnr, on_dir)
-    local rustc = get_rustc({ notify_on_error = true })
-    if not rustc then
-      return
-    end
-
-    local cargo = get_cargo({ notify_on_error = true })
-    if not cargo then
+    if not executable_exists('rustc', { env_override = 'RUSTC' }) or not executable_exists('cargo') then
       return
     end
 
     local fname = vim.api.nvim_buf_get_name(bufnr)
-    if is_library(fname) then
-      local clients = vim.lsp.get_clients { name = 'rust_analyzer' }
-      local reused_dir = #clients > 0 and clients[#clients].config.root_dir or nil
-      if reused_dir then
-        on_dir(reused_dir)
-        return
-      end
+    local reused_dir = is_library(fname)
+    if reused_dir then
+      on_dir(reused_dir)
+      return
     end
 
     local cargo_crate_dir = vim.fs.root(fname, { 'Cargo.toml' })
@@ -147,7 +137,7 @@ return {
     end
 
     local cmd = {
-      cargo,
+      'cargo',
       'metadata',
       '--no-deps',
       '--format-version',
@@ -211,12 +201,7 @@ return {
     ---@param command table{ title: string, command: string, arguments: any[] }
     vim.lsp.commands['rust-analyzer.runSingle'] = function(command)
       local r = command.arguments[1]
-      local cargo = get_cargo({ notify_on_error = true })
-      if not cargo then
-        return
-      end
-
-      local cmd = { cargo, unpack(r.args.cargoArgs) }
+      local cmd = { 'cargo', unpack(r.args.cargoArgs) }
       if r.args.executableArgs and #r.args.executableArgs > 0 then
         vim.list_extend(cmd, { '--', unpack(r.args.executableArgs) })
       end
