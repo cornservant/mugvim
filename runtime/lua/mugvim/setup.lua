@@ -167,6 +167,11 @@ end
 function M:base_commands()
     local function toggle_format_on_write()
         vim.g.mugvim_autoformat = not vim.g.mugvim_autoformat
+        if vim.g.mugvim_autoformat then
+            vim.notify("format on write: on", vim.log.levels.INFO)
+        else
+            vim.notify("format on write: off", vim.log.levels.INFO)
+        end
     end
     vim.api.nvim_create_user_command("MugvimEditUserConfig", function() require("mugvim"):edit_user_config() end, {})
     vim.api.nvim_create_user_command("MugvimVersion", function() print(require("mugvim"):version()) end, {})
