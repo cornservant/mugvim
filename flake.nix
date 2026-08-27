@@ -1,6 +1,6 @@
 {
   inputs = {
-    nixpkgs.url = "https://github.com/NixOS/nixpkgs/archive/531670d871c0e29724a02f3cbcac170adc65b58c.tar.gz";
+    nixpkgs.url = "https://github.com/NixOS/nixpkgs/archive/f4f698677b11021a8f84f452e23ae9ef2427bec3.tar.gz";
     flake-parts.url = "github:hercules-ci/flake-parts";
   };
   outputs =
