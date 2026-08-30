@@ -8,13 +8,13 @@
       eachSupportedSystem = nixpkgs.lib.genAttrs nixpkgs.lib.systems.flakeExposed;
       eachPkgs = f: eachSupportedSystem (system: f (nixpkgs.legacyPackages.${system}));
     in
-    {
-      formatter = eachPkgs (pkgs: pkgs.nixfmt);
-      packages = eachPkgs (pkgs: rec {
+    builtins.mapAttrs (_: eachPkgs) {
+      formatter = pkgs: pkgs.nixfmt;
+      packages = pkgs: rec {
         default = mugvim;
         mugvim = pkgs.callPackage ./package.nix { };
-      });
-      devShells = eachPkgs (
+      };
+      devShells =
         pkgs:
         pkgs.mkShell {
           packages = with pkgs; [
@@ -24,7 +24,6 @@
             zig
             nurl
           ];
-        }
-      );
+        };
     };
 }
