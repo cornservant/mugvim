@@ -61,7 +61,6 @@ let
       '';
       packages.mugvim = {
         start = with vimPlugins; [
-          editorconfig-nvim
           blink-cmp
           bufferline-nvim
           bufferline-editor-nvim
