@@ -39,14 +39,14 @@ let
       nvim-web-devicons
     ];
   };
-  haunt-nvim = vimUtils.buildVimPlugin rec {
+  haunt-nvim = vimUtils.buildVimPlugin {
     pname = "haunt-nvim";
-    version = "1.3.0";
+    version = "cornservant-edition";
     src = fetchFromGitHub {
-      owner = "TheNoeTrevino";
+      owner = "cornservant";
       repo = "haunt.nvim";
-      rev = "v${version}";
-      hash = "sha256-MieiFpcuTgNAJOBoflIMfzipxat49dGusEoFFS81/hg=";
+      rev = "0507755988372efaf073bc760a32e51765b1c482";
+      hash = "sha256-XOEnCLerlHjIYM3kpXBSHa6xtKXedLWoJpTpqNrVr64=";
     };
     dependencies = with vimPlugins; [
       snacks-nvim
