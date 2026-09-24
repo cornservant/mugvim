@@ -182,15 +182,16 @@ function M:plugin_which_key()
     require("which-key").setup({})
     require('which-key').add({
         { "<leader>+",  group = "Mugvim" },
+        { "<leader>+s", function() require("mugvim.b"):render_to_buffer() end, desc = "Startup time breakdown" },
         { "<leader>b",  group = "Buffer" },
-        { "<leader>c",  vim.cmd.bdelete,  desc = "Close Buffer" },
+        { "<leader>c",  vim.cmd.bdelete,                                       desc = "Close Buffer" },
         { "<leader>f",  group = "File" },
         { "<leader>g",  group = "Git" },
-        { "<leader>q",  vim.cmd.quit,     desc = "Quit" },
+        { "<leader>q",  vim.cmd.quit,                                          desc = "Quit" },
         { "<leader>s",  group = "Search" },
         { "<leader>t",  group = "Toggle" },
         { "<leader>th", group = "History" },
-        { "<leader>w",  vim.cmd.write,    desc = "Write" },
+        { "<leader>w",  vim.cmd.write,                                         desc = "Write" },
     })
 end
 
