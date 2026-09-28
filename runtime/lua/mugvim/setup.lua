@@ -67,6 +67,17 @@ function M:base_keymaps()
     vim.keymap.set('n', '<S-l>', '<cmd>BufferLineCycleNext<cr>')
     vim.keymap.set('t', '<esc><esc>', '<c-\\><c-n>')
     vim.keymap.set('i', '<M-backspace>', '<c-w>')
+
+    -- this takes over the function of the Q key in neovim <= 0.12
+    -- from 0.13 on, Q takes on the function of placing multi-cursors
+    vim.keymap.set({ 'n', 'v' }, '<C-.>', function()
+        local register = vim.fn.reg_recorded()
+        if string.len(register) > 0 then
+            vim.cmd.normal("@" .. vim.fn.reg_recorded())
+        else
+            vim.notify("no macro recorded", vim.log.levels.INFO)
+        end
+    end)
 end
 
 function M:base_autocmds()
