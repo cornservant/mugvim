@@ -43,9 +43,9 @@ let
     pname = "haunt-nvim";
     version = "cornservant-edition";
     src = fetchFromGitHub {
-      owner = "cornservant";
+      owner = "TheNoeTrevino";
       repo = "haunt.nvim";
-      rev = "0507755988372efaf073bc760a32e51765b1c482";
+      rev = "31d0bc7cfe41139533c2c022f5a8ba580701d481";
       hash = "sha256-XOEnCLerlHjIYM3kpXBSHa6xtKXedLWoJpTpqNrVr64=";
     };
     dependencies = with vimPlugins; [
