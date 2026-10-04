@@ -909,4 +909,12 @@ function M:plugin_dap_and_dapui()
     })
 end
 
+function M:plugin_digraph_picker()
+    require('digraph-picker').setup({
+        picker = "snacks"
+    })
+    vim.keymap.set({ 'i', 'n' }, '<C-k><C-k>', require('digraph-picker').insert_digraph,
+        { noremap = true, silent = true, desc = "Digraph picker" })
+end
+
 return M

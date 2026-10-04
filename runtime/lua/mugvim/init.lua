@@ -57,6 +57,7 @@ function M:init(version)
     b:bench("plugin_fff", setup.plugin_fff)
     b:bench("plugin_haunt", setup.plugin_haunt)
     b:bench("plugin_dap_and_dapui", setup.plugin_dap_and_dapui)
+    b:bench("plugin_digraph_picker", setup.plugin_digraph_picker)
 
     b:bench("after_plugin_load_hooks", function()
         require('mugvim.hooks').run_after_plugin_load_hooks()

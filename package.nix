@@ -52,6 +52,18 @@ let
       snacks-nvim
     ];
   };
+  digraph-picker = vimUtils.buildVimPlugin {
+    pname = "digraph-picker";
+    version = "0.1.0";
+    src = fetchgit {
+      url = "https://git.loporrit.de/long/digraph-picker.nvim";
+      rev = "7a2b57ddcd75f98c1052ac7ddff95659d9a74f78";
+      hash = "sha256-SREF1YwXCOfeM5yEz5V0sQk6UBRppJhrdxrgSZdJo98=";
+    };
+    dependencies = with vimPlugins; [
+      snacks-nvim
+    ];
+  };
   neovim_with_plugins = neovim.override {
     configure = {
       customRC = ''
@@ -104,6 +116,7 @@ let
           haunt-nvim
           nvim-dap
           nvim-dap-ui
+          digraph-picker
           mugvim-lib
         ];
       };
