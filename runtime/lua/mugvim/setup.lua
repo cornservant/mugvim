@@ -884,6 +884,22 @@ function M:plugin_dap_and_dapui()
             cwd = '${workspaceFolder}',
             stopAtBeginningOfMainSubprogram = false,
         },
+        {
+            name = "Attach to process (Select PID)",
+            type = "gdb",
+            request = "attach",
+            pid = require('dap.utils').pick_process,
+            args = {},
+        },
+        {
+            name = "Attach to process (Manual PID)",
+            type = "gdb",
+            request = "attach",
+            pid = function()
+                return tonumber(vim.fn.input('Process ID: '))
+            end,
+            args = {},
+        },
     }
     dap.listeners.before.attach.dapui_config = function()
         dapui.open()
