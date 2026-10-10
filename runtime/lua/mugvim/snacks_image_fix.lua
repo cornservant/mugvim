@@ -5,7 +5,7 @@ local M = {}
 vim.g.snacks_image_disabled = vim.g.snacks_image_disabled or false
 
 ---Patch the placement method to just hide if the `vim.g.snacks_image_disabled` variable is true
-local placement = require("snacks.image.placement")
+local placement = require("snacks").image.placement
 local original_update = placement.update
 function placement:update()
   if vim.g.snacks_image_disabled then
@@ -18,8 +18,8 @@ end
 ---Disable snacks.image by closing images and setting `vim.g.disable_snacks_image` to true
 M.disable_snacks_image = function()
   -- Close all images
-  Snacks.image.doc.hover_close()
-  Snacks.image.placement.clean()
+  require("snacks").image.doc.hover_close()
+  require("snacks").image.placement.clean()
 
   -- For toggle
   vim.g.snacks_image_disabled = true

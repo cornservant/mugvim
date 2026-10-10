@@ -25,6 +25,9 @@ let
     pname = "mugvim-lib";
     inherit version;
     src = ./runtime;
+    dependencies = with vimPlugins; [
+      snacks-nvim
+    ];
   };
   bufferline-editor-nvim = vimUtils.buildVimPlugin rec {
     pname = "bufferline-editor-nvim";
