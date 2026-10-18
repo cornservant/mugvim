@@ -933,4 +933,8 @@ function M:plugin_digraph_picker()
         { noremap = true, silent = true, desc = "Digraph picker" })
 end
 
+function M:plugin_typst_preview()
+    require("typst-preview").setup()
+end
+
 return M

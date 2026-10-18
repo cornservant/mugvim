@@ -120,6 +120,7 @@ let
           nvim-dap
           nvim-dap-ui
           digraph-picker
+          typst-preview-nvim
           mugvim-lib
         ];
       };
