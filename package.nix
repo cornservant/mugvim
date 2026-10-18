@@ -121,6 +121,7 @@ let
           nvim-dap-ui
           digraph-picker
           typst-preview-nvim
+          jj-nvim
           mugvim-lib
         ];
       };

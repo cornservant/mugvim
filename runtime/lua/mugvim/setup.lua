@@ -937,4 +937,8 @@ function M:plugin_typst_preview()
     require("typst-preview").setup()
 end
 
+function M:plugin_jj()
+    require("jj").setup()
+end
+
 return M
