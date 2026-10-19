@@ -72,8 +72,9 @@ function M:base_keymaps()
     -- from 0.13 on, Q takes on the function of placing multi-cursors
     vim.keymap.set({ 'n', 'v' }, '<C-.>', function()
         local register = vim.fn.reg_recorded()
+        local count = vim.v.count > 0 and vim.v.count or 1
         if string.len(register) > 0 then
-            vim.cmd.normal("@" .. vim.fn.reg_recorded())
+            vim.cmd.normal(count .. "@" .. vim.fn.reg_recorded())
         else
             vim.notify("no macro recorded", vim.log.levels.INFO)
         end
