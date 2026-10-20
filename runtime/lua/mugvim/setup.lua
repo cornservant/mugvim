@@ -700,26 +700,15 @@ function M:plugin_multicursor()
     set("n", "<c-leftrelease>", mc.handleMouseRelease)
 
     -- Disable and enable cursors.
-    set({ "n", "x" }, "<c-q>", mc.toggleCursor)
+    set({ "n", "x" }, "Q", mc.toggleCursor)
+    set({ "n", "x" }, "q=", function()
+        if mc.cursorsEnabled() then mc.disableCursors() else mc.enableCursors() end
+    end)
 
-    -- Mappings defined in a keymap layer only apply when there are
-    -- multiple cursors. This lets you have overlapping mappings.
-    mc.addKeymapLayer(function(layerSet)
-        -- Select a different cursor as the main one.
-        layerSet({ "n", "x" }, "<left>", mc.prevCursor)
-        layerSet({ "n", "x" }, "<right>", mc.nextCursor)
-
-        -- Delete the main cursor.
-        layerSet({ "n", "x" }, "<leader>x", mc.deleteCursor)
-
-        -- Enable and clear cursors using escape.
-        layerSet("n", "<esc>", function()
-            if not mc.cursorsEnabled() then
-                mc.enableCursors()
-            else
-                mc.clearCursors()
-            end
-        end)
+    -- Clear cursors
+    set({ "n", "x" }, "<C-L>", function()
+        vim.cmd("nohlsearch|diffupdate|normal! <C-L>")
+        mc.clearCursors()
     end)
 
     -- Customize how cursors look.
